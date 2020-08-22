@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> - Bootstrap Table</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../static/css/animate.css" rel="stylesheet">
+    <link href="../static/css/style.css?v=4.1.0" rel="stylesheet">
+    
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="ibox float-e-margins">
+
+                    <div class="col-sm-12">
+                        <!-- Example Events -->
+                        <div class="example-wrap">
+                            <div class="example">
+                                <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
+                                    <button id="addBtn" type="button" class="btn btn-outline btn-default" data-toggle="modal" data-target="#myModal">
+                                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                                        添加维修点
+                                    </button>
+                                    <button id="updateBtn" type="button" class="btn btn-outline btn-default">
+                                        <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
+                                        修改
+                                    </button>
+                                    <button id="importBtn" type="button" class="btn btn-outline btn-default">
+                                        <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
+                                        导入
+                                    </button>
+                                    <button id="delBtn" type="button" class="btn btn-outline btn-default">
+                                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                                        删除
+                                    </button>
+                                </div>
+                                <form id="selectUserCondition" class="form-inline">
+                                    <div class="form-group">
+                                        <label for="exampleInputSnumber2">公司名称:</label>
+                                        <input type="text" name="companyname" class="form-control" id="exampleInputSnumber2" placeholder="请输入公司名称">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputRecorder2">公司地址:</label>
+                                        <input type="text" name="companysite" class="form-control" id="exampleInputRecorder2" placeholder="请输入公司地址">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputApprover3">热线电话:</label>
+                                        <input type="text" name="hotline" class="form-control" id="exampleInputApprover3" placeholder="请输入热线电话">
+                                    </div>
+
+                                    <button id="conditionSelectBtn" type="button" class="btn btn-default">搜索</button>
+                                </form>
+                                <table id="usersTable" data-mobile-responsive="true">
+                                </table>
+
+                            </div>
+                        </div>
+                        <!-- End Example Events -->
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- End Panel Other -->
+    </div>
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">公司信息</h4>
+                </div>
+                <div class="modal-body">
+                    <select id="province">
+                        <option>------请选择------</option>
+                    </select>省
+                    <select id="city">
+                        <option>------请选择------</option>
+                    </select>市
+                    <select id="county">
+                        <option>------请选择------</option>
+                    </select>县
+                    <form role="form" id="addForm">
+                        <div class="form-group">
+                            <label for="adduname">公司名称</label>
+                            <input type="text" class="form-control" name="companyname" id="adduname" placeholder="请输入公司名称">
+                        </div>
+                        <div class="form-group">
+                            <label for="addupwd">公司地址</label>
+                            <input type="text" class="form-control" name="companysite" id="addupwd" placeholder="请输入公司地址">
+                        </div>
+                        <div class="form-group">
+                            <label for="adduphone">热线电话</label>
+                            <input type="text" class="form-control" name="hotline" id="adduphone" placeholder="请输入热线电话">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="addSaveBtn">提交添加</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="userInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel2">公司信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" id="updateForm">
+                        <input type="hidden" name="id">
+                        <div class="form-group">
+                            <label for="updatecompanyname">名称</label>
+                            <input type="text" class="form-control" name="companyname" id="updatecompanyname">
+                        </div>
+                        <div class="form-group">
+                            <label for="updatecompanysite">手机号</label>
+                            <input type="text" class="form-control" name="companysite" id="updatecompanysite">
+                        </div>
+                        <div class="form-group">
+                            <label for="updatehotline">热线电话</label>
+                            <input type="text" class="form-control" name="hotline" id="updatehotline">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="updateSaveBtn">提交更改</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!-- 全局js -->
+    <script src="../static/js/jquery.min.js?v=2.1.4"></script>
+    <script src="../static/js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- 自定义js -->
+    <script src="../static/js/content.js?v=1.0.0"></script>
+
+
+    <!-- Bootstrap table -->
+    <script src="../static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <!-- Peity -->
+    <script src="../static/js/jquery.serializejson.min.js"></script>
+    <script src="../static/js/plugins/layer/layer.min.js"></script>
+    <script src="../static/js/addr.js"></script>
+    <script src="../static/js/maintain.js"></script>
+
+
+
+</body>
+
+</html>

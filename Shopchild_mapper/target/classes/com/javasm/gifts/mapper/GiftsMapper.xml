@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.gifts.mapper.GiftsMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.gifts.entity.Gifts" >
+    <id column="gid" property="gid" jdbcType="INTEGER" />
+    <result column="gname" property="gname" jdbcType="VARCHAR" />
+    <result column="gtype" property="gtype" jdbcType="VARCHAR" />
+    <result column="gnum" property="gnum" jdbcType="INTEGER" />
+    <result column="gprice" property="gprice" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    gid, gname, gtype, gnum, gprice
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gifts
+    where gid = #{gid,jdbcType=INTEGER}
+  </select>
+<!--  查询所有-->
+  <select id="selectAllGifts" parameterType="com.javasm.gifts.entity.Gifts" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from gifts
+    <where>
+      <if test="gid!=null">
+        and gid =#{gid}
+      </if>
+      <if test="gname!=null and gname!=''">
+        and gname like "%"#{gname}"%"
+      </if>
+      <if test="gtype!=null and gtype!=''">
+        and gtype=#{gtype}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gifts
+    where gid = #{gid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByArr"  >
+    delete from gifts
+    where gid in
+    <foreach collection="array" item="gid" open="(" close=")" separator=",">
+      #{gid}
+    </foreach>
+  </delete>
+  <insert id="insert" parameterType="com.javasm.gifts.entity.Gifts" >
+    insert into gifts (gid, gname, gtype, 
+      gnum, gprice)
+    values (#{gid,jdbcType=INTEGER}, #{gname,jdbcType=VARCHAR}, #{gtype,jdbcType=VARCHAR}, 
+      #{gnum,jdbcType=INTEGER}, #{gprice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.gifts.entity.Gifts" >
+    insert into gifts
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gid != null" >
+        gid,
+      </if>
+      <if test="gname != null" >
+        gname,
+      </if>
+      <if test="gtype != null" >
+        gtype,
+      </if>
+      <if test="gnum != null" >
+        gnum,
+      </if>
+      <if test="gprice != null" >
+        gprice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gid != null" >
+        #{gid,jdbcType=INTEGER},
+      </if>
+      <if test="gname != null" >
+        #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="gtype != null" >
+        #{gtype,jdbcType=VARCHAR},
+      </if>
+      <if test="gnum != null" >
+        #{gnum,jdbcType=INTEGER},
+      </if>
+      <if test="gprice != null" >
+        #{gprice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.gifts.entity.Gifts" >
+    update gifts
+    <set >
+      <if test="gname != null" >
+        gname = #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="gtype != null" >
+        gtype = #{gtype,jdbcType=VARCHAR},
+      </if>
+      <if test="gnum != null" >
+        gnum = #{gnum,jdbcType=INTEGER},
+      </if>
+      <if test="gprice != null" >
+        gprice = #{gprice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.gifts.entity.Gifts" >
+    update gifts
+    set gname = #{gname,jdbcType=VARCHAR},
+      gtype = #{gtype,jdbcType=VARCHAR},
+      gnum = #{gnum,jdbcType=INTEGER},
+      gprice = #{gprice,jdbcType=DECIMAL}
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加返厂入库单</title>
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../static/css/animate.css" rel="stylesheet">
+    <link href="../static/css/style.css?v=4.1.0" rel="stylesheet">
+</head>
+<body>
+    <button id="showGoods" class="btn btn-success">选择入库商品</button>
+    <table id="usersTable" data-mobile-responsive="true"></table>
+    <form id="selectUserCondition">
+        <input type="hidden" name="outkustatus" value="已出库">
+    </form>
+    <form id="addForm">
+        <input type="hidden" name="id">
+        <div class="form-group">
+            <label for="updateuname">入库编号:</label>
+            <input type="text" readonly class="form-control" name="rukudanhao" id="updateuname">
+        </div>
+        <div class="form-group">
+            <select name="rukustatus" class="form-control">
+                <option value="">入库状态:</option>
+                <option value="未入库">未入库</option>
+                <option value="已入库">已入库</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="zhidanren1">制单人:</label>
+            <input type="text" class="form-control" name="zhidanren" id="zhidanren1">
+        </div>
+        <div class="form-group">
+            <label for="approver1">审核人:</label>
+            <input type="text" class="form-control" name="approver" id="approver1">
+        </div>
+        <input type="hidden" name="approvestatus" value="未审核">
+        <div class="form-group">
+            <label for="beizhu1">备注:</label>
+            <input type="text" class="form-control" name="beizhu" id="beizhu1">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">返厂地点</label>
+            <input type="text" class="form-control" id="exampleInputEmail1">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">返厂原因</label>
+            <textarea type="text" class="form-control" id="exampleInputPassword1"></textarea>
+        </div>
+        <button type="button" id="addBtn" class="btn btn-default">保存添加</button>
+        <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);">返回</button>
+    </form>
+
+
+
+
+    <!-- 全局js -->
+    <script src="../static/js/jquery.min.js?v=2.1.4"></script>
+    <script src="../static/js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- 自定义js -->
+    <script src="../static/js/content.js?v=1.0.0"></script>
+
+
+    <!-- Bootstrap table -->
+    <script src="../static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <!-- Peity -->
+    <script src="../static/js/jquery.serializejson.min.js"></script>
+    <script src="../static/js/plugins/layer/layer.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#addBtn").click(function () {
+                var rows = $('#usersTable').bootstrapTable('getSelections');
+                $("#updateuname").val(rows[0].outkudan);
+                $.post("../Returnfactoryruku/add",$("#addForm").serialize(),function (data) {
+                    if(data.status==20003){
+                        layer.msg("添加成功");
+                        $('#usersTable').bootstrapTable('refresh');
+                    }else{
+                        layer.msg("添加失败");
+                    }
+                })
+            });
+
+            $("#showGoods").click(function () {
+
+                $('#usersTable').bootstrapTable({
+                    columns: [{
+                        checkbox:true
+                    },{
+                        field: 'id',
+                        title: '序号'
+                    }, {
+                        field: 'outkudan',
+                        title: '出库单编号'
+                    }, {
+                        field: 'outkustatus',
+                        title: '出库状态'
+                    }, {
+                        field: 'zhidanren',
+                        title: '制单人'
+                    }, {
+                        field: 'zhidandate',
+                        title: '制单时间'
+                    }, {
+                        field: 'approver',
+                        title: '审批人'
+                    }, {
+                        field: 'approvedate',
+                        title: '审批时间'
+                    }, {
+                        field: 'approvestatus',
+                        title: '审批状态'
+                    }, {
+                        title: '操作',
+                        formatter:function(value,row,index,field){
+                            return "<button>审核跟踪</button>"
+                        }
+                    }],
+                    url: "../Returnfactorychuku/show",//get请求
+                    treeView: true,//是否显示树形视图
+                    queryParamsType:'',
+                    dataField:"list",
+                    pageSize:10,
+                    sidePagination:"server",
+                    toolbar: '#exampleTableEventsToolbar',
+                    pagination:'true',
+                    queryParams:function(params) {
+                        var queryParmas = $("#selectUserCondition").serializeJSON();//得到查询参数，目的为了分页带着参数
+                        return Object.assign(params,queryParmas);//json对象组合
+                    }
+                });
+            });
+
+
+        })
+    </script>
+</body>
+</html>

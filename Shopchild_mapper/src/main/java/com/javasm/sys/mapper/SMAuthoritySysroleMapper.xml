@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.sys.mapper.SMAuthoritySysroleMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.sys.entity.SMAuthoritySysrole" >
+    <id column="aid" property="aid" jdbcType="INTEGER" />
+    <result column="aname" property="aname" jdbcType="VARCHAR" />
+    <result column="asec" property="asec" jdbcType="VARCHAR" />
+    <result column="astatus" property="astatus" jdbcType="VARCHAR" />
+    <result column="aoperation" property="aoperation" jdbcType="VARCHAR" />
+    <result column="rname" property="rname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    aid, aname, asec, astatus, aoperation, rname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sm_authority_sysrole
+    where aid = #{aid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllAuthority" resultMap="BaseResultMap" parameterType="com.javasm.sys.entity.SMAuthoritySysrole">
+    select
+    <include refid="Base_Column_List" />
+    from sm_authority_sysrole
+    <where>
+      <if test="aid!=null and aid!=''">
+        and aid=#{aid}
+      </if>
+      <if test="aname!=null and aname!=''">
+        and aname=#{aname}
+      </if>
+      <if test="asec!=null and asec!=''">
+        and asec=#{asec}
+      </if>
+      <if test="astatus!=null and astatus!=''">
+        and astatus=#{astatus}
+      </if>
+      <if test="aoperation!=null and aoperation!=''">
+        and aoperation=#{aoperation}
+      </if>
+      <if test="rname!=null and rname!=''">
+        and rname=#{rname}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sm_authority_sysrole
+    where aid = #{aid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteAuthority">
+    delete from sm_authority_sysrole where aid in
+    <foreach collection="array" item="aid" open="(" close=")" separator=",">
+      #{aid}
+    </foreach>
+  </delete>
+
+  <insert id="insert" parameterType="com.javasm.sys.entity.SMAuthoritySysrole" >
+    insert into sm_authority_sysrole (aid, aname, asec, 
+      astatus, aoperation, rname
+      )
+    values (#{aid,jdbcType=INTEGER}, #{aname,jdbcType=VARCHAR}, #{asec,jdbcType=VARCHAR}, 
+      #{astatus,jdbcType=VARCHAR}, #{aoperation,jdbcType=VARCHAR}, #{rname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.sys.entity.SMAuthoritySysrole" >
+    insert into sm_authority_sysrole
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aid != null and aid!=''" >
+        aid,
+      </if>
+      <if test="aname != null and aname!=''" >
+        aname,
+      </if>
+      <if test="asec != null and asec!=''" >
+        asec,
+      </if>
+      <if test="astatus != null and astatus!=''" >
+        astatus,
+      </if>
+      <if test="aoperation != null and aoperation!=''" >
+        aoperation,
+      </if>
+      <if test="rname != null and rname!=''" >
+        rname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aid != null and aid!=''" >
+        #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="aname != null and aname!=''" >
+        #{aname,jdbcType=VARCHAR},
+      </if>
+      <if test="asec != null and asec!=''" >
+        #{asec,jdbcType=VARCHAR},
+      </if>
+      <if test="astatus != null and astatus!=''" >
+        #{astatus,jdbcType=VARCHAR},
+      </if>
+      <if test="aoperation != null and aoperation!=''" >
+        #{aoperation,jdbcType=VARCHAR},
+      </if>
+      <if test="rname != null and rname!=''" >
+        #{rname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.sys.entity.SMAuthoritySysrole" >
+    update sm_authority_sysrole
+    <set >
+      <if test="aname != null and aname!=''" >
+        aname = #{aname,jdbcType=VARCHAR},
+      </if>
+      <if test="asec != null and asec!=''" >
+        asec = #{asec,jdbcType=VARCHAR},
+      </if>
+      <if test="astatus != null and astatus!=''" >
+        astatus = #{astatus,jdbcType=VARCHAR},
+      </if>
+      <if test="aoperation != null and aoperation!=''" >
+        aoperation = #{aoperation,jdbcType=VARCHAR},
+      </if>
+      <if test="rname != null and rname!=''" >
+        rname = #{rname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.sys.entity.SMAuthoritySysrole" >
+    update sm_authority_sysrole
+    set aname = #{aname,jdbcType=VARCHAR},
+      asec = #{asec,jdbcType=VARCHAR},
+      astatus = #{astatus,jdbcType=VARCHAR},
+      aoperation = #{aoperation,jdbcType=VARCHAR},
+      rname = #{rname,jdbcType=VARCHAR}
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+</mapper>

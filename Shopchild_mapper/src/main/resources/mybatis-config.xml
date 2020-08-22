@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+   <!-- <properties resource="properties.txt"></properties>-->
+
+    <!--mybatis的调整设置，调整默认行为-->
+    <settings>
+        <!--日志输出-->
+        <setting name="logImpl" value="LOG4J2"/>
+    </settings>
+
+    <!--别名-->
+    <typeAliases>
+        <package name="com.javasm"></package>
+    </typeAliases>
+
+</configuration>

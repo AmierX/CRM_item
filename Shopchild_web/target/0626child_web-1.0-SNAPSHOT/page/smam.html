@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> - Bootstrap Table</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../static/css/animate.css" rel="stylesheet">
+    <link href="../static/css/style.css?v=4.1.0" rel="stylesheet">
+
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins">
+        <div class="col-sm-12">
+            <!-- Example Events -->
+            <div class="example-wrap">
+                <div class="example">
+                    <div class="btn-group hidden-xs" id="smamTableToolbar" role="group">
+                        <form id="searchForm" class="form-inline">
+                            <div class="form-group">
+                                <select id="aname" name="aname" class="form-control">
+                                    <option value="">所有权限</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select id="astatus" name="astatus" class="form-control">
+                                    <option value="">权限状态</option>
+                                    <option value="有效">有效</option>
+                                    <option value="无效">无效</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-sm btn-primary pull-right m-t-n-xs searchBtn" type="button">搜索</button>
+                            </div>
+                        </form>
+                        <br>
+                        <button id="addBtn" type="button" class="btn btn-outline btn-default">
+                            <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                            权限添加
+                        </button>
+                        <button id="updateBtn" type="button" class="btn btn-outline btn-default">
+                            <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
+                            权限修改
+                        </button>
+                        <button id="delBtn" type="button" class="btn btn-outline btn-default">
+                            <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                            权限删除
+                        </button>
+                        <a class="btn btn-outline btn-default" href="sm_perToReport.html">权限报表</a>
+                    </div>
+
+                    <table id="smamTable" data-mobile-responsive="true"></table>
+                </div>
+            </div>
+            <!-- End Example Events -->
+        </div>
+    </div>
+</div>
+<!-- End Panel Other -->
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">权限添加</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="addForm">
+                    <div class="form-group">
+                        <label for="addaname">权限名称</label>
+                        <select name="aname" id="addaname" class="form-control">
+                            <option value="">权限名称</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="addrname">角色名称</label>
+                        <select name="rname" id="addrname" class="form-control">
+                            <option value="">角色名称</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="addasec">权限描述</label>
+                        <input type="text" class="form-control" name="asec" id="addasec" placeholder="请进行该权限描述">
+                    </div>
+                    <div class="form-group">
+                        <label for="addaoperation">可执行操作</label>
+                        <span id="addaoperation"></span>
+                        <input type="checkbox" name="aoperation"  value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="addastatus">权限状态</label>
+                        <select id="addastatus" name="astatus">
+                            <option value="有效">有效</option>
+                            <option value="无效">无效</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="addSaveBtn">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel2">权限修改</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="updateForm">
+                    <div class="form-group">
+                        <label for="updateaname">权限名称</label>
+                        <select name="aname" id="updateaname" class="form-control">
+                            <option value="">权限名称</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="updatername">角色名称</label>
+                        <select name="rname" id="updatername" class="form-control">
+                            <option value="">角色名称</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateasec">权限描述</label>
+                        <input type="text" class="form-control" name="asec" id="updateasec" placeholder="请进行该权限描述">
+                    </div>
+                    <div class="form-group">
+                        <label for="updateaoperation">可执行操作</label>
+                        <span id="updateaoperation"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="updateastatus">权限状态</label>
+                        <select id="updateastatus" name="astatus">
+                            <option value="有效">有效</option>
+                            <option value="无效">无效</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="updateSaveBtn">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 全局js -->
+<script src="../static/js/jquery.min.js?v=2.1.4"></script>
+<script src="../static/js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="../static/js/content.js?v=1.0.0"></script>
+
+
+<!-- Bootstrap table -->
+<script src="../static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<!-- Peity -->
+<script src="../static/js/jquery.serializejson.min.js"></script>
+<script src="../static/js/plugins/layer/layer.min.js"></script>
+<script src="../static/js/smam.js"></script>
+
+
+
+</body>
+
+</html>

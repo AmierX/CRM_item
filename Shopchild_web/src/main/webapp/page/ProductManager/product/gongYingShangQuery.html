@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--<meta name="renderer" content="webkit">-->
+
+    <title> 供应商管理</title>
+
+    <!--<meta name="keywords" content="">-->
+    <!--<meta name="description" content="">-->
+
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script src="../../../static/js/baseurl.js"></script>
+    <link rel="shortcut icon" href="../../../static/img/favicon.ico">
+    <link href="../../../static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="../../../static/css/animate.css" rel="stylesheet">
+    <link href="../../../static/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="../../../static/css/layer/skin/layer.css"/>
+    <script type="text/javascript" src="../../../static/js/jquery.min.js"></script><!--static/js/jquery.min.js-->
+    <script type="text/javascript" src="../../../static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../../../static/js/plugins/layer/layer.min.js"></script>
+    <script type="text/javascript" src="../../../static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../static/js/serializeToObject.js"></script>
+</head>
+<body>
+<hr class="line"/>
+<div class="container">
+    <form class="form-inline" action="">
+        <div class="form-group">
+            <label for="stockcode">存货档案编号</label>
+            <input type="text" class="form-control" id="stockcode" name="stockcode" />
+        </div>
+    </form>
+    <form class="form-inline" action="">
+        <div class="form-group">
+            <label for="brand">产品品牌</label>
+            <input type="text" class="form-control" id="brand" name="brand" />
+        </div>
+    </form>
+    <form class="form-inline" action="">
+        <div class="form-group">
+            <label for="producttype">产品分类</label>
+            <input type="text" class="form-control" id="producttype" name="producttype" />
+        </div>
+    </form>
+    <form class="form-inline" >
+
+
+        <button type="button"  id="add"   class="btn btn-primary  btn-sm" style="margin-right:15px;"  >添加</button>
+
+    </form>
+    <br/>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-hover" id="table">
+                <!--<thead>-->
+                <!--<tr><th>序号</th><th>存货档案编号</th><th>基础库分类</th><th>基础库品牌</th><th>基础库型号</th><th>基础库颜色</th></tr>-->
+
+                <!--</thead>-->
+                <!--<tbody id="tbody">-->
+                <!--<tr class="info"><td>序号</td><td>存货档案编号</td><td>基础库分类</td><td>基础库品牌</td><td>基础库型号</td><td>基础库颜色</td></tr>-->
+                <!--<tr class="info"><td>序号</td><td>存货档案编号</td><td>基础库分类</td><td>基础库品牌</td><td>基础库型号</td><td>基础库颜色</td></tr>-->
+                <!--<tr class="info"><td>序号</td><td>存货档案编号</td><td>基础库分类</td><td>基础库品牌</td><td>基础库型号</td><td>基础库颜色</td></tr>-->
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--模态框-->
+    <!-- 修改数据模态框（Modal） -->
+    <form id="editForm" class="form-horizontal" role="form">
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="updateModalLabel">
+                            修改项目
+                        </h4>
+                    </div>
+                    {# 模态框body #}
+                    <div class="modal-body" style="height: 100%;">
+
+                        <div class="form-group">
+                            <label for="gid" class="col-sm-3 control-label">序号</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="gid" name="gid" class="form-control"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gname" class="col-sm-3 control-label">供应商名称</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="gname" name="gname" class="form-control"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="glinkman" class="col-sm-3 control-label">联系人</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="glinkman" name="glinkman" class="form-control"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gphone" class="col-sm-3 control-label">联系电话</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="gphone" name="gphone" class="form-control"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gadress" class="col-sm-3 control-label">联系地址</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="gadress" name="gadress" class="form-control"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gaccount" class="col-sm-3 control-label">开户账号</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="gaccount" name="gaccount" class="form-control"/>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    {# 模态框底部#}
+                    <div class="modal-footer">
+                        <input type="button" id="addBtn"  class="btn btn-primary"  data-dismiss="modal" value="添加"></input>
+                        <button type="button" id="close" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <input type="button" id="submit" class="btn btn-primary" class="submitBtn" value="提交" />
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+        {##}
+    </form>
+    <!--模态框底部-->
+    <!--添加商品模态框-->
+
+</div>
+<script>
+    var ctx=getRootPath();
+    //添加按钮
+    function operateFormatter(value, row, index) {
+        return [
+
+            '<button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;">删除</button>',
+
+            '<button type="button" class="RoleOfedit btn btn-primary  btn-sm" style="margin-right:15px;">修改</button>'
+        ].join('');
+    }
+    //按钮的点击事件
+    window.operateEvents = {
+        'click .RoleOfdelete': function (e, value, row, index) {
+            layer.confirm("确定删除吗?",{btn:["确定","取消"],btn1:function () {
+                    console.log(row.gid);
+                    var id=row.gid;
+                    $.get("/gongYingShang/deleteInfo?id="+id,function (result) {
+                        layer.msg(result.ms);
+                        $("#table").bootstrapTable("refresh");
+                    });
+
+                },btn2:function () {
+                    layer.closeAll();
+                }});
+        },
+        'click .RoleOfedit': function (e, value, row, index) {
+           $("#addBtn").hide();
+            $("#gid").val(row.gid);
+            $("#gname").val(row.gname);
+            $("#glinkman").val(row.glinkman);
+            $("#gphone").val(row.gphone);
+            $("#gadress").val(row.gadress);
+            $("#gaccount").val(row.gaccount);
+
+
+
+            $("#submit").show();
+            $("#editModal").modal('show');
+            editById(row, index);
+
+        }
+    };
+    function editById(row, index) {
+        $("#submit").click(function () {
+            $.post("/gongYingShang/edit",{
+                gid: $("#gid").val(),
+                gname:$("#gname").val(),
+                glinkman:$("#glinkman").val(),
+                gphone:$("#gphone").val(),
+                gadress:$("#gadress").val(),
+                gaccount:$("#gaccount").val()
+            },function (result) {
+                $("#editModal").modal('hide');
+                layer.msg(result.ms)
+                $("#table").bootstrapTable("refresh");
+            })
+        })
+    }
+    $("#add").click(function () {
+        $("#submit").hide();
+        $("#editModal").modal('show');
+        $("#addBtn").click(function () {
+           $.post("/gongYingShang/add",{
+
+               gname:$("#gname").val(),
+               glinkman:$("#glinkman").val(),
+               gphone:$("#gphone").val(),
+               gadress:$("#gadress").val(),
+               gaccount:$("#gaccount").val()
+           },function (result) {
+               layer.msg(result.ms);
+               $("#table").bootstrapTable("refresh");
+           })
+        })
+    })
+
+    function queryByPage(startIndex, pageSize) {
+        var offset=(startIndex-1)*pageSize;// 每页显示数据的开始行号
+        console.log(offset);
+        $("#table").bootstrapTable({ // 对应table标签的id
+            url: ctx+"/gongYingShang", //AJAX获取表格数据的url
+            striped: true, //是否显示行间隔色(斑马线)
+            pagination: true, //是否显示分页（*）
+            sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+            paginationLoop: false, //当前页是边界时是否可以继续按
+            queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
+                return {
+                    limit: pageSize, // 每页要显示的数据条数
+                    offset: offset, // 每页显示数据的开始行号
+//sort: params.sort, // 要排序的字段
+//sortOrder: params.order, // 排序规则
+//dataId: $("#dataId").val() // 额外添加的参数
+                }
+            },//传递参数（*）
+            pageNumber: 1, //初始化加载第一页，默认第一页
+            pageSize: 5, //每页的记录行数（*）
+            pageList: [3,6,9], //可供选择的每页的行数（*）
+            contentType: "application/x-www-form-urlencoded",//一种编码。在post请求的时候需要用到。这里用的get请求，注释掉这句话也能拿到数据
+//search: true, //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+            strictSearch: false, //是否全局匹配,false模糊匹配
+            showColumns: true, //是否显示所有的列
+            showRefresh: true, //是否显示刷新按钮
+            minimumCountColumns: 2, //最少允许的列数
+            clickToSelect: false, //是否启用点击选中行
+//height: 500, //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+//uniqueId: "id", //每一行的唯一标识，一般为主键列
+            showToggle: true, //是否显示详细视图和列表视图的切换按钮
+            cardView: false, //是否显示详细视图
+            detailView: false, //是否显示父子表
+            cache: true, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+            sortable: true, //是否启用排序
+            sortOrder: "asc", //排序方式
+            sortName: 'sn', // 要排序的字段
+            columns: [
+                {
+                    field: 'gid', // 返回json数据中的name
+                    title: '序号', // 表格表头显示文字
+                    align: 'center', // 左右居中
+                    valign: 'middle' // 上下居中
+                }, {
+                    field: 'gname',
+                    title: '供应商名称',
+                    align: 'center',
+                    valign: 'middle'
+                }, {
+                    field: 'glinkman',
+                    title: '联系人',
+                    align: 'center',
+                    valign: 'middle'
+
+                },
+                {
+                    field: 'gphone',
+                    title: '联系电话',
+                    align: 'center',
+                    valign: 'middle'
+
+                },
+                {
+                    field: 'gadress',
+                    title: '联系地址',
+                    align: 'center',
+                    valign: 'middle'
+
+                },
+                {
+                    field: 'gaccount',
+                    title: '开户账号',
+                    align: 'center',
+                    valign: 'middle'
+
+                },
+                {
+                    field:'Button',
+                    title:'操作',
+                    events:operateEvents,
+                    formatter:operateFormatter
+                }
+            ],
+            onLoadSuccess: function () { //加载成功时执行
+                console.info("加载成功");
+            },
+            onLoadError: function () { //加载失败时执行
+                console.info("加载数据失败");
+            }
+        })
+    }
+    $(function () {
+        queryByPage(1,3);
+    })
+</script>
+</body>
+
+</html>

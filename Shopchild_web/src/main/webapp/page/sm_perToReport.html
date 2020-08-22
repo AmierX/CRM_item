@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> - Bootstrap Table</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../static/css/animate.css" rel="stylesheet">
+    <link href="../static/css/style.css?v=4.1.0" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins">
+        <div class="col-sm-12">
+            <!-- Example Events -->
+            <div class="example-wrap">
+                <div class="example">
+                    <div class="btn-group hidden-xs" id="ptrTableToolbar" role="group">
+                        <form id="searchForm" class="form-inline">
+                            <div class="form-group">
+                                <label for="pdept">归属部门</label>
+                                <select name="pdept" id="pdept" class="form-control">
+                                    <option value="">所属部门</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select id="pstatus" name="pstatus" class="form-control">
+                                    <option value="">用户状态</option>
+                                    <option value="有效">有效</option>
+                                    <option value="无效">无效</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="prole">用户角色</label>
+                                <select id="prole" name="prole" class="form-control">
+                                    <option value="">角色</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="ppost">用户职务</label>
+                                <select id="ppost" name="ppost" class="form-control">
+                                    <option value="">职务</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="pacc">用户登录名</label>
+                                <input type="text" class="form-control" name="pacc" id="pacc" placeholder="请输入用户登录名">
+                            </div>
+                            <div class="form-group">
+                                <label for="pname">用户姓名</label>
+                                <input type="text" class="form-control" name="pname" id="pname" placeholder="请输入用户姓名">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-sm btn-primary pull-right m-t-n-xs searchBtn" type="button">搜索</button>
+                            </div>
+                        </form>
+                        <br>
+                    </div>
+                    <table id="ptrTable" data-mobile-responsive="true"></table>
+                    <button id="exportBtn" type="button" class="btn btn-outline btn-default">
+                        <i class="glyphicon glyphicon-export" aria-hidden="true"></i>
+                        权限导出
+                    </button>
+                </div>
+            </div>
+            <!-- End Example Events -->
+        </div>
+    </div>
+</div>
+
+<!-- 全局js -->
+<script src="../static/js/jquery.min.js?v=2.1.4"></script>
+<script src="../static/js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="../static/js/content.js?v=1.0.0"></script>
+
+
+<!-- Bootstrap table -->
+<script src="../static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<!-- Peity -->
+<script src="../static/js/jquery.serializejson.min.js"></script>
+<script src="../static/js/plugins/layer/layer.min.js"></script>
+<script src="../static/js/sm_perToReport.js"></script>
+</body>
+</html>

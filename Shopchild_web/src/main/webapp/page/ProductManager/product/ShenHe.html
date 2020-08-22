@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--<meta name="renderer" content="webkit">-->
+
+    <title> 供应商管理</title>
+
+    <!--<meta name="keywords" content="">-->
+    <!--<meta name="description" content="">-->
+
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script src="../../../static/js/baseurl.js"></script>
+    <link rel="shortcut icon" href="../../../static/img/favicon.ico">
+    <link href="../../../static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="../../../static/css/animate.css" rel="stylesheet">
+    <link href="../../../static/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="../../../static/css/layer/skin/layer.css"/>
+    <script type="text/javascript" src="../../../static/js/jquery.min.js"></script><!--static/js/jquery.min.js-->
+    <script type="text/javascript" src="../../../static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../../../static/js/plugins/layer/layer.min.js"></script>
+    <script type="text/javascript" src="../../../static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../static/js/serializeToObject.js"></script>
+</head>
+<body>
+<hr class="line"/>
+<div class="container">
+    <form class="form-inline" action="">
+        <div class="form-group">
+            <label for="stockcode">存货档案编号</label>
+            <input type="text" class="form-control" id="stockcode" name="stockcode" />
+        </div>
+    </form>
+    <form class="form-inline" action="">
+        <div class="form-group">
+            <label for="brand">产品品牌</label>
+            <input type="text" class="form-control" id="brand" name="brand" />
+        </div>
+    </form>
+    <form class="form-inline" action="">
+        <div class="form-group">
+            <label for="producttype">产品分类</label>
+            <input type="text" class="form-control" id="producttype" name="producttype" />
+        </div>
+    </form>
+    <br/>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-hover" id="table">
+                <!--<thead>-->
+                <!--<tr><th>序号</th><th>存货档案编号</th><th>基础库分类</th><th>基础库品牌</th><th>基础库型号</th><th>基础库颜色</th></tr>-->
+
+                <!--</thead>-->
+                <!--<tbody id="tbody">-->
+                <!--<tr class="info"><td>序号</td><td>存货档案编号</td><td>基础库分类</td><td>基础库品牌</td><td>基础库型号</td><td>基础库颜色</td></tr>-->
+                <!--<tr class="info"><td>序号</td><td>存货档案编号</td><td>基础库分类</td><td>基础库品牌</td><td>基础库型号</td><td>基础库颜色</td></tr>-->
+                <!--<tr class="info"><td>序号</td><td>存货档案编号</td><td>基础库分类</td><td>基础库品牌</td><td>基础库型号</td><td>基础库颜色</td></tr>-->
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--模态框-->
+    <!-- 修改数据模态框（Modal） -->
+    <form id="editForm" class="form-horizontal" role="form">
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="updateModalLabel">
+                            修改项目
+                        </h4>
+                    </div>
+                    {# 模态框body #}
+                    <div class="modal-body" style="height: 100%;">
+
+                        <div class="form-group">
+                            <label for="sid" class="col-sm-3 control-label" >存货档案编号</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="sid" name="sid" class="form-control" readonly="true"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sstorecode" class="col-sm-3 control-label">存货档案编号</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="sstorecode" name="sstorecode" class="form-control" readonly="true"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="stype" class="col-sm-3 control-label">基础库分类</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="stype" name="stype" class="form-control" readonly="true"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sbrand" class="col-sm-3 control-label">基础库品牌</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="sbrand" name="sbrand" class="form-control" readonly="true"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="smodel" class="col-sm-3 control-label">基础库型号</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="smodel" name="smodel" class="form-control" readonly="true"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="scolor" class="col-sm-3 control-label">基础库颜色</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="scolor" name="scolor" class="form-control" readonly="true"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sname" class="col-sm-3 control-label">基础库名称</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="sname" name="sname" class="form-control" readonly="true"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="puhuo" class="col-sm-3 control-label">是否是铺货</label>
+                            <div class="col-sm-5">
+                                <select class="selectpicker" id="puhuo"  name="puhuo" readonly="true">
+                                    <option value="1">是</option>
+                                    <option value="0">不是</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="beiji" class="col-sm-3 control-label">是否是备机</label>
+                            <div class="col-sm-5">
+                                <select class="selectpicker" id="beiji"  name="beiji" readonly="true">
+                                    <option value="1">是</option>
+                                    <option value="0">不是</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderprice" class="col-sm-3 control-label">采购价</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="orderprice" name="orderprice" class="form-control" readonly="true"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="marketprice" class="col-sm-3 control-label">市场价</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="marketprice" name="marketprice" class="form-control" readonly="true"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="shopprice" class="col-sm-3 control-label">市场价</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="shopprice" name="shopprice" class="form-control" readonly="true"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="loweststock" class="col-sm-3 control-label">最低库存量</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="loweststock" name="loweststock" class="form-control" readonly="true"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderable" class="col-sm-3 control-label">是否可以采购</label>
+                            <div class="col-sm-5">
+                                <select class="selectpicker" id="orderable"  name="orderable" readonly="true">
+                                    <option value="1">是</option>
+                                    <option value="0">不是</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    {# 模态框底部#}
+                    <div class="modal-footer">
+                        <button type="button" id="close" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <input type="button" id="jujue" class="btn btn-danger" value="拒绝通过"/>
+                        <input type="button" id="submit" class="btn btn-success" value="通过"/>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+        {##}
+    </form>
+    <!--模态框底部-->
+</div>
+<script>
+    var ctx = getRootPath();
+
+
+    function shenHe(row, index) {
+        var dataObj = $("#table").bootstrapTable("getData");
+        var mid_id=dataObj[index].sid;
+        console.log(dataObj);
+        $.get(ctx+"/product/getYileiInfo?id="+mid_id,function (result) {
+
+            //把选中的属性清除掉,不然造成混乱
+            $("select option:selected ").attr("selected",false);
+            //绑定第二次查询的数据
+            if(result.datas.puhuo===0){//如果值是0[不是铺货],把第二个选中
+                $("#puhuo option")[1].selected=true;
+                var obj = document.getElementById("puhuo");
+                obj[1].selected=true;
+            }
+            if(result.datas.beiji===0){//如果值是0[不是备机],把第二个选中
+                var obj = document.getElementById("beiji");
+                obj[1].selected=true;
+            }
+            if(result.datas.orderable===0){//如果值是0[不是可以采购的],把第二个选中
+                var obj = document.getElementById("orderable");
+                obj[1].selected=true;
+            }
+
+            $("#orderprice").val(result.datas.orderprice);
+            $("#marketprice").val(result.datas.marketprice);
+            $("#shopprice").val(result.datas.shopprice);
+            $("#loweststock").val(result.datas.loweststock);
+
+        });
+        //在查一次t_product表
+        $.get(ctx+"/product/queryById?sid="+mid_id,function (result) {
+            console.log(result.datas);
+            $("#sid").val(result.datas.sid);
+            $("#sstorecode").val(result.datas.sstorecode);
+            $("#stype").val(result.datas.stype);
+            $("#sbrand").val(result.datas.sbrand);
+            $("#smodel").val(result.datas.smodel);
+            $("#scolor").val(result.datas.scolor);
+            $("#sname").val(result.datas.sname);
+        })
+
+
+
+        $("#editModal").modal('show');
+
+
+        //提交通过
+        $("#submit").click(function () {
+
+            var sid=$("#sid").val();
+
+            $.ajax({
+                url: ctx + "/priceInfo/shenHe?sid="+sid,
+                type: "get",
+                 success: function (result) {
+                    layer.msg(result.ms);
+                }
+            })
+            //$("#table").bootstrapTable("refresh");
+            $("#editModal").modal("hide");
+
+        });
+        //提交通过
+        $("#jujue").click(function () {
+
+            var sid=$("#sid").val();
+            console.log(sid)
+            $.ajax({
+                url: ctx + "/priceInfo/jujue?sid="+sid,
+                type: "get",
+                success: function (result) {
+                    layer.msg(result.ms);
+                }
+            })
+            //$("#table").bootstrapTable("refresh");
+            $("#editModal").modal("hide");
+
+        });
+    }
+
+    //添加按钮
+    function operateFormatter(value, row, index) {
+        return [
+
+            '<button type="button" class="GoToShenHe btn btn-primary  btn-sm" style="margin-right:15px;">进行审核</button>'
+        ].join('');
+    }
+
+    //按钮的点击事件
+    window.operateEvents = {
+
+        'click  .GoToShenHe':function (e, value, row, index) {
+            console.log("审核")
+            shenHe(row, index);
+        }
+    };
+
+    function queryByPage(startIndex, pageSize) {
+        var offset=(startIndex-1)*pageSize;// 每页显示数据的开始行号
+        console.log(offset);
+        $("#table").bootstrapTable({ // 对应table标签的id
+            url: ctx+"/priceInfo", //AJAX获取表格数据的url
+            striped: true, //是否显示行间隔色(斑马线)
+            pagination: true, //是否显示分页（*）
+            sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+            paginationLoop: false, //当前页是边界时是否可以继续按
+            queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
+                return {
+                    limit: pageSize, // 每页要显示的数据条数
+                    offset: offset, // 每页显示数据的开始行号
+//sort: params.sort, // 要排序的字段
+//sortOrder: params.order, // 排序规则
+//dataId: $("#dataId").val() // 额外添加的参数
+                }
+            },//传递参数（*）
+            pageNumber: 1, //初始化加载第一页，默认第一页
+            pageSize: 5, //每页的记录行数（*）
+            pageList: [3,6,9], //可供选择的每页的行数（*）
+            contentType: "application/x-www-form-urlencoded",//一种编码。在post请求的时候需要用到。这里用的get请求，注释掉这句话也能拿到数据
+//search: true, //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+            strictSearch: false, //是否全局匹配,false模糊匹配
+            showColumns: true, //是否显示所有的列
+            showRefresh: true, //是否显示刷新按钮
+            minimumCountColumns: 2, //最少允许的列数
+            clickToSelect: false, //是否启用点击选中行
+//height: 500, //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+//uniqueId: "id", //每一行的唯一标识，一般为主键列
+            showToggle: true, //是否显示详细视图和列表视图的切换按钮
+            cardView: false, //是否显示详细视图
+            detailView: false, //是否显示父子表
+            cache: true, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+            sortable: true, //是否启用排序
+            sortOrder: "asc", //排序方式
+            sortName: 'sn', // 要排序的字段
+            columns: [
+                {
+                    field: 'id', // 返回json数据中的name
+                    title: '序号', // 表格表头显示文字
+                    align: 'center', // 左右居中
+                    valign: 'middle' // 上下居中
+                },{
+                    field:"sname",
+                    title:"商品名",
+                    align:"center",
+                    valign:"middle"
+                },
+                {
+                    field: 'puhuo',
+                    title: '是否是铺货',
+                    align: 'center',
+                    valign: 'middle',
+                    formatter:function(value, row, index, field) {
+                       return row.puhuo==0? "否":row.puhuo==1? "是": "系统异常";
+                    }
+                }, {
+                    field: 'beiji',
+                    title: '是否是备机',
+                    align: 'center',
+                    valign: 'middle',
+                    formatter:function(value, row, index, field) {
+                        return row.beiji==0? "否":row.beiji==1? "是": "系统异常";
+                    }
+
+                },
+                {
+                    field: 'orderprice',
+                    title: '采购价',
+                    align: 'center',
+                    valign: 'middle'
+
+                },
+                {
+                    field: 'marketprice',
+                    title: '市场价',
+                    align: 'center',
+                    valign: 'middle'
+
+                },
+                {
+                    field: 'shopprice',
+                    title: '商场价',
+                    align: 'center',
+                    valign: 'middle'
+
+                },
+                {
+                    field: 'loweststock',
+                    title: '最低存货量',
+                    align: 'center',
+                    valign: 'middle'
+
+                },
+                {
+                    field: 'orderable',
+                    title: '是否可以采购',
+                    align: 'center',
+                    valign: 'middle',
+                    formatter:function (value, row, index, field) {
+                        //console.log(row);
+                        return row.orderable==0? "否":row.orderable==1? "是": "系统异常";
+                    }
+
+                },
+                {
+                    field:'Button',
+                    title:'操作',
+                    events:operateEvents,
+                    formatter:operateFormatter
+                },{
+                    field:"sid",
+                    align: 'center',
+                    valign: 'middle',
+                    formatter:function (value, row, index, field){
+                        return "<div class='hidden'><input type='text' value='"
+                            +row.sid
+                            +"'  readonly='true'></div>";
+                    }
+                }
+            ],
+            onLoadSuccess: function () { //加载成功时执行
+                console.info("加载成功");
+            },
+            onLoadError: function () { //加载失败时执行
+                console.info("加载数据失败");
+            }
+        })
+    }
+    $(function () {
+        queryByPage(1,3);
+    })
+</script>
+</body>
+
+</html>

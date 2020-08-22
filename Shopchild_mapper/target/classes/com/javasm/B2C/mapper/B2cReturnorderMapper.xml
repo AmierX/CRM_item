@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.B2C.mapper.B2cReturnorderMapper">
+    <resultMap id="BaseResultMap" type="com.javasm.B2C.entity.B2cReturnorder">
+        <id column="b2crId" property="b2crId" jdbcType="INTEGER"/>
+        <result column="b2crOrderNum" property="b2crOrderNum" jdbcType="INTEGER"/>
+        <result column="b2crOrderType" property="b2crOrderType" jdbcType="VARCHAR"/>
+        <result column="b2crReason" property="b2crReason" jdbcType="VARCHAR"/>
+        <result column="b2crOrderOdd" property="b2crOrderOdd" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMap2" type="com.javasm.B2C.entity.B2cReturnorder">
+        <id column="b2crId" property="b2crId" jdbcType="INTEGER"/>
+        <result column="b2crOrderNum" property="b2crOrderNum" jdbcType="INTEGER"/>
+        <result column="b2crOrderType" property="b2crOrderType" jdbcType="VARCHAR"/>
+        <result column="b2crReason" property="b2crReason" jdbcType="VARCHAR"/>
+        <result column="b2crOrderOdd" property="b2crOrderOdd" jdbcType="VARCHAR"/>
+
+        <association column="b2cNum" property="b2cSaleorder" javaType="com.javasm.B2C.entity.B2cSaleorder">
+            <result column="b2cNum" property="b2cNum"></result>
+            <result column="b2cOrderHandle" property="b2cOrderHandle"></result>
+            <result column="b2cService" property="b2cService"></result>
+        </association>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    b2crId, b2crOrderNum, b2crOrderType, b2crReason, b2crOrderOdd
+  </sql>
+
+    <select id="selectB2cReturnorderByNum" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from b2c_returnorder
+        <where>
+            <if test="b2crOrderNum!=null and b2crOrderNum!=''">
+                and b2crOrderNum=#{b2crOrderNum}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAllB2cReturnorder" resultMap="BaseResultMap2" parameterType="B2cReturnorder">
+        select u.*,d.b2cOrderHandle,d.b2cService from b2c_returnorder u,b2c_saleorder d
+        <where>
+            and d.b2cNum=u.b2crOrderNum
+            <if test="b2crReason!=null and b2crReason!=''">
+                and u.b2crReason=#{b2crReason}
+            </if>
+            <if test="b2crOrderNum!=null and b2crOrderNum!=''">
+                and u.b2crOrderNum=#{b2crOrderNum}
+            </if>
+            <if test="b2cSaleorder!=null">
+                <if test="b2cSaleorder.getB2cService!=null and b2cSaleorder.getB2cService!=''">
+                    and d.b2cService=#{b2cSaleorder.getB2cService}
+                </if>
+                <if test="b2cSaleorder.getB2cOrderHandle!=null and b2cSaleorder.getB2cOrderHandle!=''">
+                    and d.b2cOrderHandle=#{b2cSaleorder.getB2cOrderHandle}
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from b2c_returnorder
+        where b2crId = #{b2crId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from b2c_returnorder
+    where b2crId = #{b2crId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.javasm.B2C.entity.B2cReturnorder">
+    insert into b2c_returnorder (b2crId, b2crOrderNum, b2crOrderType,
+      b2crReason, b2crOrderOdd)
+    values (#{b2crId,jdbcType=INTEGER}, #{b2crOrderNum,jdbcType=INTEGER}, #{b2crOrderType,jdbcType=VARCHAR},
+      #{b2crReason,jdbcType=VARCHAR}, #{b2crOrderOdd,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.javasm.B2C.entity.B2cReturnorder">
+        insert into b2c_returnorder
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="b2crId != null">
+                b2crId,
+            </if>
+            <if test="b2crOrderNum != null">
+                b2crOrderNum,
+            </if>
+            <if test="b2crOrderType != null">
+                b2crOrderType,
+            </if>
+            <if test="b2crReason != null">
+                b2crReason,
+            </if>
+            <if test="b2crOrderOdd != null">
+                b2crOrderOdd,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="b2crId != null">
+                #{b2crId,jdbcType=INTEGER},
+            </if>
+            <if test="b2crOrderNum != null">
+                #{b2crOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="b2crOrderType != null">
+                #{b2crOrderType,jdbcType=VARCHAR},
+            </if>
+            <if test="b2crReason != null">
+                #{b2crReason,jdbcType=VARCHAR},
+            </if>
+            <if test="b2crOrderOdd != null">
+                #{b2crOrderOdd,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.javasm.B2C.entity.B2cReturnorder">
+        update b2c_returnorder
+        <set>
+            <if test="b2crOrderNum != null">
+                b2crOrderNum = #{b2crOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="b2crOrderType != null">
+                b2crOrderType = #{b2crOrderType,jdbcType=VARCHAR},
+            </if>
+            <if test="b2crReason != null">
+                b2crReason = #{b2crReason,jdbcType=VARCHAR},
+            </if>
+            <if test="b2crOrderOdd != null">
+                b2crOrderOdd = #{b2crOrderOdd,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where b2crId = #{b2crId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.javasm.B2C.entity.B2cReturnorder">
+    update b2c_returnorder
+    set b2crOrderNum = #{b2crOrderNum,jdbcType=INTEGER},
+      b2crOrderType = #{b2crOrderType,jdbcType=VARCHAR},
+      b2crReason = #{b2crReason,jdbcType=VARCHAR},
+      b2crOrderOdd = #{b2crOrderOdd,jdbcType=VARCHAR}
+    where b2crId = #{b2crId,jdbcType=INTEGER}
+  </update>
+</mapper>

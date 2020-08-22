@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> - Bootstrap Table</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../static/css/animate.css" rel="stylesheet">
+    <link href="../static/css/style.css?v=4.1.0" rel="stylesheet">
+
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins">
+        <div class="example">
+            <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
+                <button id="addBtn" type="button" class="btn btn-outline btn-default" data-toggle="modal" data-target="#myModal">
+                    添加
+                </button>
+                <button id="updateBtn" type="button" class="btn btn-outline btn-default">
+                    修改
+                </button>
+                <button id="delBtn" type="button" class="btn btn-outline btn-default">
+                    删除
+                </button>
+            </div>
+
+            <form id="selectUserCondition" class="form-inline">
+
+                <div class="form-group">
+                    <label for="exampleInputRecorder2">赠品名称:</label>
+                    <input type="text" name="gname" class="form-control" id="exampleInputRecorder2"placeholder="请输入赠品名称">
+                </div>
+                <div class="form-group">
+                    <label for="gtype">赠品类型:</label>
+                    <input type="text" name="gtype" class="form-control" id="gtype"  placeholder="请输入赠品类型">
+                </div>
+                <div class="form-group">
+                    <label for="gstatus">审核状态:</label>
+                    <input type="text" name="gstatus" class="form-control" id="gstatus"  placeholder="请输入赠品类型">
+                </div>
+                <button id="conditionSelectBtn" type="button" class="btn btn-default">查询</button>
+            </form>
+
+            <table id="giftsTable" data-height="400" data-mobile-responsive="true">
+                <thead>
+
+                </thead>
+            </table>
+        </div>
+    </div>
+    <!-- End Example Events -->
+</div>
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">赠品信息</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="addForm">
+                    <div class="form-group">
+                        <label for="addgname">赠品名称</label>
+                        <input type="text" class="form-control" name="gname" id="addgname" placeholder="请输入名称">
+                    </div>
+                    <div class="form-group">
+                        <label for="addgtype">赠品类型</label>
+                        <input type="text" class="form-control" name="gtype" id="addgtype" placeholder="请输入赠品类型">
+                    </div>
+                    <div class="form-group">
+                        <label for="addgnum">赠品数量</label>
+                        <input type="text" class="form-control" name="gnum" id="addgnum" placeholder="请输入赠品数量">
+                    </div>
+                    <div class="form-group">
+                        <label for="addgprice">赠品价格</label>
+                        <input type="text" class="form-control" name="gprice" id="addgprice" placeholder="请输入赠品价格">
+                    </div>
+                    <div class="form-group">
+                        <label for="addgstatus">审核状态:</label>
+                        <input type="text" name="gstatus" class="form-control" id="addgstatus"  placeholder="请输入赠品类型">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="addSaveBtn">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="userInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel2">赠品信息</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="updateForm">
+                    <div class="form-group">
+                        <label for="upgid">赠品编号</label>
+                        <input type="text" class="form-control" name="gid" id="upgid" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="upgname">赠品名称</label>
+                        <input type="text" class="form-control" name="gname" id="upgname" >
+                    </div>
+                    <div class="form-group">
+                        <label for="upgtype">赠品类型</label>
+                        <input type="text" class="form-control" name="gtype" id="upgtype" >
+                    </div>
+                    <div class="form-group">
+                        <label for="upgnum">赠品数量</label>
+                        <input type="text" class="form-control" name="gnum" id="upgnum" >
+                    </div>
+                    <div class="form-group">
+                        <label for="upgprice">赠品价格</label>
+                        <input type="text" class="form-control" name="gprice" id="upgprice" >
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="updateSaveBtn">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 全局js -->
+<script src="../static/js/jquery.min.js?v=2.1.4"></script>
+<script src="../static/js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="../static/js/content.js?v=1.0.0"></script>
+
+
+<!-- Bootstrap table -->
+<script src="../static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<!-- Peity -->
+<script src="../static/js/jquery.serializejson.min.js"></script>
+<script src="../static/js/plugins/layer/layer.min.js"></script>
+<script src="../static/js/giftToGood.js"></script>
+
+
+</body>
+
+</html>

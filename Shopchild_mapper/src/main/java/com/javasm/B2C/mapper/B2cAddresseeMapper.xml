@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.B2C.mapper.B2cAddresseeMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.B2C.entity.B2cAddressee" >
+    <id column="adId" property="adId" jdbcType="INTEGER" />
+    <result column="adOrderNum" property="adOrderNum" jdbcType="INTEGER" />
+    <result column="adAcc" property="adAcc" jdbcType="VARCHAR" />
+    <result column="adPhone" property="adPhone" jdbcType="VARCHAR" />
+    <result column="adMoblePhone" property="adMoblePhone" jdbcType="VARCHAR" />
+    <result column="adPCode" property="adPCode" jdbcType="VARCHAR" />
+    <result column="adAddress" property="adAddress" jdbcType="VARCHAR" />
+    <result column="adRegion" property="adRegion" jdbcType="VARCHAR" />
+    <result column="adPostMoney" property="adPostMoney" jdbcType="VARCHAR" />
+    <result column="adTime" property="adTime" jdbcType="TIMESTAMP" />
+    <result column="adMail" property="adMail" jdbcType="VARCHAR" />
+    <result column="adName" property="adName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    adId, adOrderNum, adAcc, adPhone, adMoblePhone, adPCode, adAddress, adRegion, adPostMoney, 
+    adTime, adMail, adName
+  </sql>
+
+  <select id="selectUserByNum" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from b2c_addressee
+    <where>
+      <if test="adOrderNum!=null and adOrderNum!=''">
+        and adOrderNum=#{adOrderNum,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b2c_addressee
+    where adId = #{adId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b2c_addressee
+    where adId = #{adId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.javasm.B2C.entity.B2cAddressee" >
+    insert into b2c_addressee (adId, adOrderNum, adAcc, 
+      adPhone, adMoblePhone, adPCode, 
+      adAddress, adRegion, adPostMoney, 
+      adTime, adMail, adName
+      )
+    values (#{adId,jdbcType=INTEGER}, #{adOrderNum,jdbcType=INTEGER}, #{adAcc,jdbcType=VARCHAR}, 
+      #{adPhone,jdbcType=VARCHAR}, #{adMoblePhone,jdbcType=VARCHAR}, #{adPCode,jdbcType=VARCHAR}, 
+      #{adAddress,jdbcType=VARCHAR}, #{adRegion,jdbcType=VARCHAR}, #{adPostMoney,jdbcType=VARCHAR}, 
+      #{adTime,jdbcType=TIMESTAMP}, #{adMail,jdbcType=VARCHAR}, #{adName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.B2C.entity.B2cAddressee" >
+    insert into b2c_addressee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adId != null" >
+        adId,
+      </if>
+      <if test="adOrderNum != null" >
+        adOrderNum,
+      </if>
+      <if test="adAcc != null" >
+        adAcc,
+      </if>
+      <if test="adPhone != null" >
+        adPhone,
+      </if>
+      <if test="adMoblePhone != null" >
+        adMoblePhone,
+      </if>
+      <if test="adPCode != null" >
+        adPCode,
+      </if>
+      <if test="adAddress != null" >
+        adAddress,
+      </if>
+      <if test="adRegion != null" >
+        adRegion,
+      </if>
+      <if test="adPostMoney != null" >
+        adPostMoney,
+      </if>
+      <if test="adTime != null" >
+        adTime,
+      </if>
+      <if test="adMail != null" >
+        adMail,
+      </if>
+      <if test="adName != null" >
+        adName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adId != null" >
+        #{adId,jdbcType=INTEGER},
+      </if>
+      <if test="adOrderNum != null" >
+        #{adOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="adAcc != null" >
+        #{adAcc,jdbcType=VARCHAR},
+      </if>
+      <if test="adPhone != null" >
+        #{adPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="adMoblePhone != null" >
+        #{adMoblePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="adPCode != null" >
+        #{adPCode,jdbcType=VARCHAR},
+      </if>
+      <if test="adAddress != null" >
+        #{adAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="adRegion != null" >
+        #{adRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="adPostMoney != null" >
+        #{adPostMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="adTime != null" >
+        #{adTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adMail != null" >
+        #{adMail,jdbcType=VARCHAR},
+      </if>
+      <if test="adName != null" >
+        #{adName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.B2C.entity.B2cAddressee" >
+    update b2c_addressee
+    <set >
+      <if test="adOrderNum != null" >
+        adOrderNum = #{adOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="adAcc != null" >
+        adAcc = #{adAcc,jdbcType=VARCHAR},
+      </if>
+      <if test="adPhone != null" >
+        adPhone = #{adPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="adMoblePhone != null" >
+        adMoblePhone = #{adMoblePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="adPCode != null" >
+        adPCode = #{adPCode,jdbcType=VARCHAR},
+      </if>
+      <if test="adAddress != null" >
+        adAddress = #{adAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="adRegion != null" >
+        adRegion = #{adRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="adPostMoney != null" >
+        adPostMoney = #{adPostMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="adTime != null" >
+        adTime = #{adTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adMail != null" >
+        adMail = #{adMail,jdbcType=VARCHAR},
+      </if>
+      <if test="adName != null" >
+        adName = #{adName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where adId = #{adId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.B2C.entity.B2cAddressee" >
+    update b2c_addressee
+    set adOrderNum = #{adOrderNum,jdbcType=INTEGER},
+      adAcc = #{adAcc,jdbcType=VARCHAR},
+      adPhone = #{adPhone,jdbcType=VARCHAR},
+      adMoblePhone = #{adMoblePhone,jdbcType=VARCHAR},
+      adPCode = #{adPCode,jdbcType=VARCHAR},
+      adAddress = #{adAddress,jdbcType=VARCHAR},
+      adRegion = #{adRegion,jdbcType=VARCHAR},
+      adPostMoney = #{adPostMoney,jdbcType=VARCHAR},
+      adTime = #{adTime,jdbcType=TIMESTAMP},
+      adMail = #{adMail,jdbcType=VARCHAR},
+      adName = #{adName,jdbcType=VARCHAR}
+    where adId = #{adId,jdbcType=INTEGER}
+  </update>
+</mapper>

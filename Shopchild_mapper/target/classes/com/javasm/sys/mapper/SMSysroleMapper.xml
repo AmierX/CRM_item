@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.sys.mapper.SMSysroleMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.sys.entity.SMSysrole" >
+    <id column="rid" property="rid" jdbcType="INTEGER" />
+    <result column="rencod" property="rencod" jdbcType="VARCHAR" />
+    <result column="rname" property="rname" jdbcType="VARCHAR" />
+    <result column="rdec" property="rdec" jdbcType="VARCHAR" />
+    <result column="rstatus" property="rstatus" jdbcType="VARCHAR" />
+    <result column="rdept" property="rdept" jdbcType="VARCHAR" />
+    <result column="rauthority" property="rauthority" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rid, rencod, rname, rdec, rstatus, rdept, rauthority
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sm_sysrole
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllRole" resultMap="BaseResultMap" parameterType="com.javasm.sys.entity.SMSysrole" >
+    select
+    <include refid="Base_Column_List" />
+    from sm_sysrole
+    <where>
+      <if test="rid!=null and rid!=''">
+        and rid=#{rid}
+      </if>
+      <if test="rencod!=null and rencod!=''">
+        and rencod like "%"#{rencod}"%"
+      </if>
+      <if test="rname!=null and rname!=''">
+        and rname=#{rname}
+      </if>
+      <if test="rdec!=null and rdec!=''">
+        and rdec=#{rdec}
+      </if>
+      <if test="rstatus!=null and rstatus!=''">
+        and rstatus like "%"#{rstatus}"%"
+      </if>
+      <if test="rdept!=null and rdept!=''">
+        and rdept=#{rdept}
+      </if>
+      <if test="rauthority!=null and rauthority!=''">
+        and rauthority=#{rauthority}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sm_sysrole
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+<delete id="deleteRoles">
+  delete from sm_sysrole where rid in
+  <foreach collection="array" item="rid" open="(" close=")" separator=",">
+    #{rid}
+  </foreach>
+</delete>
+
+  <insert id="insert" parameterType="com.javasm.sys.entity.SMSysrole" >
+    insert into sm_sysrole (rid, rencod, rname, 
+      rdec, rstatus, rdept, 
+      rauthority)
+    values (#{rid,jdbcType=INTEGER}, #{rencod,jdbcType=VARCHAR}, #{rname,jdbcType=VARCHAR}, 
+      #{rdec,jdbcType=VARCHAR}, #{rstatus,jdbcType=VARCHAR}, #{rdept,jdbcType=VARCHAR}, 
+      #{rauthority,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.sys.entity.SMSysrole" >
+    insert into sm_sysrole
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null and rid!=''" >
+        rid,
+      </if>
+      <if test="rencod != null and rencod!=''" >
+        rencod,
+      </if>
+      <if test="rname != null and rname!=''" >
+        rname,
+      </if>
+      <if test="rdec != null and rdec!=''" >
+        rdec,
+      </if>
+      <if test="rstatus != null and rstatus!=''" >
+        rstatus,
+      </if>
+      <if test="rdept != null and rdept!=''" >
+        rdept,
+      </if>
+      <if test="rauthority != null and rauthority!=''" >
+        rauthority,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null and rid!=''" >
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="rencod != null and rencod!=''" >
+        #{rencod,jdbcType=VARCHAR},
+      </if>
+      <if test="rname != null and rname!=''" >
+        #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="rdec != null and rdec!=''" >
+        #{rdec,jdbcType=VARCHAR},
+      </if>
+      <if test="rstatus != null and rstatus!=''" >
+        #{rstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="rdept != null and rdept!=''" >
+        #{rdept,jdbcType=VARCHAR},
+      </if>
+      <if test="rauthority != null and rauthority!=''" >
+        #{rauthority,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.sys.entity.SMSysrole" >
+    update sm_sysrole
+    <set >
+      <if test="rencod != null and rencod!=''" >
+        rencod = #{rencod,jdbcType=VARCHAR},
+      </if>
+      <if test="rname != null and rname!=''" >
+        rname = #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="rdec != null and rdec!=''" >
+        rdec = #{rdec,jdbcType=VARCHAR},
+      </if>
+      <if test="rstatus != null and rstatus!=''" >
+        rstatus = #{rstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="rdept != null and rdept!=''" >
+        rdept = #{rdept,jdbcType=VARCHAR},
+      </if>
+      <if test="rauthority != null and rauthority!=''" >
+        rauthority = #{rauthority,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.sys.entity.SMSysrole" >
+    update sm_sysrole
+    set rencod = #{rencod,jdbcType=VARCHAR},
+      rname = #{rname,jdbcType=VARCHAR},
+      rdec = #{rdec,jdbcType=VARCHAR},
+      rstatus = #{rstatus,jdbcType=VARCHAR},
+      rdept = #{rdept,jdbcType=VARCHAR},
+      rauthority = #{rauthority,jdbcType=VARCHAR}
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+</mapper>

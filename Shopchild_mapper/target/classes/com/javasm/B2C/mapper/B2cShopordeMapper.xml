@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.B2C.mapper.B2cShopordeMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.B2C.entity.B2cShoporde" >
+    <id column="b2cwId" property="b2cwId" jdbcType="INTEGER" />
+    <result column="b2cwNum" property="b2cwNum" jdbcType="INTEGER" />
+    <result column="b2cwOrderType" property="b2cwOrderType" jdbcType="VARCHAR" />
+    <result column="b2cwGoods" property="b2cwGoods" jdbcType="VARCHAR" />
+    <result column="b2cwService" property="b2cwService" jdbcType="VARCHAR" />
+    <result column="b2cwPayType" property="b2cwPayType" jdbcType="VARCHAR" />
+    <result column="b2cwPost" property="b2cwPost" jdbcType="VARCHAR" />
+    <result column="b2cwPrderStatus" property="b2cwPrderStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    b2cwId, b2cwNum, b2cwOrderType, b2cwGoods, b2cwService, b2cwPayType, b2cwPost, b2cwPrderStatus
+  </sql>
+
+  <select id="selectAllB2cShoporde" resultMap="BaseResultMap" parameterType="B2cShoporde">
+    select
+    <include refid="Base_Column_List" />
+    from b2c_shoporde
+    <where>
+      <if test="b2cwId!=null and b2cwId!=''">
+        and b2cwId=#{b2cwId}
+      </if>
+      <if test="b2cwNum!=null and b2cwNum!=''">
+        and b2cwNum=#{b2cwNum}
+      </if>
+      <if test="b2cwOrderType!=null and b2cwOrderType!=''">
+        and b2cwOrderType=#{b2cwOrderType}
+      </if>
+      <if test="b2cwPayType!=null and b2cwPayType!=''">
+        and b2cwPayType=#{b2cwPayType}
+      </if>
+      <if test="b2cwService!=null and b2cwService!=''">
+        and b2cwService=#{b2cwService}
+      </if>
+      <if test="b2cwPrderStatus!=null and b2cwPrderStatus!=''">
+        and b2cwPrderStatus=#{b2cwPrderStatus}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b2c_shoporde
+    where b2cwId = #{b2cwId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b2c_shoporde
+    where b2cwId = #{b2cwId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.javasm.B2C.entity.B2cShoporde" >
+    insert into b2c_shoporde (b2cwId, b2cwNum, b2cwOrderType, 
+      b2cwGoods, b2cwService, b2cwPayType, 
+      b2cwPost, b2cwPrderStatus)
+    values (#{b2cwId,jdbcType=INTEGER}, #{b2cwNum,jdbcType=INTEGER}, #{b2cwOrderType,jdbcType=VARCHAR}, 
+      #{b2cwGoods,jdbcType=VARCHAR}, #{b2cwService,jdbcType=VARCHAR}, #{b2cwPayType,jdbcType=VARCHAR}, 
+      #{b2cwPost,jdbcType=VARCHAR}, #{b2cwPrderStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.B2C.entity.B2cShoporde" >
+    insert into b2c_shoporde
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="b2cwId != null" >
+        b2cwId,
+      </if>
+      <if test="b2cwNum != null" >
+        b2cwNum,
+      </if>
+      <if test="b2cwOrderType != null" >
+        b2cwOrderType,
+      </if>
+      <if test="b2cwGoods != null" >
+        b2cwGoods,
+      </if>
+      <if test="b2cwService != null" >
+        b2cwService,
+      </if>
+      <if test="b2cwPayType != null" >
+        b2cwPayType,
+      </if>
+      <if test="b2cwPost != null" >
+        b2cwPost,
+      </if>
+      <if test="b2cwPrderStatus != null" >
+        b2cwPrderStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="b2cwId != null" >
+        #{b2cwId,jdbcType=INTEGER},
+      </if>
+      <if test="b2cwNum != null" >
+        #{b2cwNum,jdbcType=INTEGER},
+      </if>
+      <if test="b2cwOrderType != null" >
+        #{b2cwOrderType,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cwGoods != null" >
+        #{b2cwGoods,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cwService != null" >
+        #{b2cwService,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cwPayType != null" >
+        #{b2cwPayType,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cwPost != null" >
+        #{b2cwPost,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cwPrderStatus != null" >
+        #{b2cwPrderStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.B2C.entity.B2cShoporde" >
+    update b2c_shoporde
+    <set >
+      <if test="b2cwNum != null" >
+        b2cwNum = #{b2cwNum,jdbcType=INTEGER},
+      </if>
+      <if test="b2cwOrderType != null" >
+        b2cwOrderType = #{b2cwOrderType,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cwGoods != null" >
+        b2cwGoods = #{b2cwGoods,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cwService != null" >
+        b2cwService = #{b2cwService,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cwPayType != null" >
+        b2cwPayType = #{b2cwPayType,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cwPost != null" >
+        b2cwPost = #{b2cwPost,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cwPrderStatus != null" >
+        b2cwPrderStatus = #{b2cwPrderStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where b2cwId = #{b2cwId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.B2C.entity.B2cShoporde" >
+    update b2c_shoporde
+    set b2cwNum = #{b2cwNum,jdbcType=INTEGER},
+      b2cwOrderType = #{b2cwOrderType,jdbcType=VARCHAR},
+      b2cwGoods = #{b2cwGoods,jdbcType=VARCHAR},
+      b2cwService = #{b2cwService,jdbcType=VARCHAR},
+      b2cwPayType = #{b2cwPayType,jdbcType=VARCHAR},
+      b2cwPost = #{b2cwPost,jdbcType=VARCHAR},
+      b2cwPrderStatus = #{b2cwPrderStatus,jdbcType=VARCHAR}
+    where b2cwId = #{b2cwId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.sys.mapper.SMSysuserMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.sys.entity.SMSysuser" >
+    <id column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="uacc" property="uacc" jdbcType="VARCHAR" />
+    <result column="upass" property="upass" jdbcType="VARCHAR" />
+    <result column="inittime" property="inittime" jdbcType="TIMESTAMP" />
+    <result column="lastlogin" property="lastlogin" jdbcType="TIMESTAMP" />
+    <result column="urole" property="urole" jdbcType="VARCHAR" />
+    <result column="uphone" property="uphone" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="upost" property="upost" jdbcType="VARCHAR" />
+    <result column="udept" property="udept" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uid, uname, uacc, upass, inittime, lastlogin, urole, uphone, status, upost, udept
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sm_sysuser
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+  <select id="selectUserBySMSysuser" resultMap="BaseResultMap" parameterType="com.javasm.sys.entity.SMSysuser" >
+    select
+    <include refid="Base_Column_List"/>
+    from sm_sysuser
+    <where>
+      <if test="uid!=null and uid!=''">
+        and uid=#{uid}
+      </if>
+      <if test="uname!=null and uname!=''">
+        and uname like "%"#{uname}"%"
+      </if>
+      <if test="upass!=null and upass!=''">
+        and upass=#{upass}
+      </if>
+      <if test="uacc!=null and uacc!=''">
+        and uacc like  "%"#{uacc}"%"
+      </if>
+      <if test="urole!=null and urole!=''">
+        and urole=#{urole}
+      </if>
+      <if test="uphone!=null and uphone!=''">
+        and uphone=#{uphone}
+      </if>
+      <if test="status!=null and status!=''">
+        and status=#{status}
+      </if>
+      <if test="upost!=null and upost!=''">
+        and upost=#{upost}
+      </if>
+      <if test="udept!=null and udept!=''">
+        and udept=#{udept}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sm_sysuser
+    where uid = #{uid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteUsers">
+    delete from sm_sysuser where uid in
+    <foreach collection="array" item="uid" open="(" close=")" separator=",">
+      #{uid}
+    </foreach>
+  </delete>
+
+  <insert id="insert" parameterType="com.javasm.sys.entity.SMSysuser" >
+    insert into sm_sysuser (uid, uname, uacc, 
+      upass, inittime, lastlogin, 
+      urole, uphone, status, 
+      upost, udept)
+    values (#{uid,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{uacc,jdbcType=VARCHAR}, 
+      #{upass,jdbcType=VARCHAR}, #{inittime,jdbcType=TIMESTAMP}, #{lastlogin,jdbcType=TIMESTAMP}, 
+      #{urole,jdbcType=VARCHAR}, #{uphone,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{upost,jdbcType=VARCHAR}, #{udept,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.sys.entity.SMSysuser" >
+    insert into sm_sysuser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null and uid !=''" >
+        uid,
+      </if>
+      <if test="uname != null and uname!=''" >
+        uname,
+      </if>
+      <if test="uacc != null and uacc!=''" >
+        uacc,
+      </if>
+      <if test="upass != null and upass!=''" >
+        upass,
+      </if>
+      <if test="1 == 1" >
+        inittime,
+      </if>
+      <if test="1 == 1" >
+        lastlogin,
+      </if>
+      <if test="urole != null and urole!=''" >
+        urole,
+      </if>
+      <if test="uphone != null and uphone!=''" >
+        uphone,
+      </if>
+      <if test="status != null and status!=''" >
+        status,
+      </if>
+      <if test="upost != null and upost!=''" >
+        upost,
+      </if>
+      <if test="udept != null and udept!=''" >
+        udept,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null and uid!=''" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="uname != null and uname!=''" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="uacc != null and uacc!=''" >
+        #{uacc,jdbcType=VARCHAR},
+      </if>
+      <if test="upass != null and upass!=''" >
+        #{upass,jdbcType=VARCHAR},
+      </if>
+      <if test="1 == 1" >
+        now(),
+      </if>
+      <if test="1 == 1" >
+        now(),
+      </if>
+      <if test="urole != null and urole!=''" >
+        #{urole,jdbcType=VARCHAR},
+      </if>
+      <if test="uphone != null and uphone!=''" >
+        #{uphone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null and status!=''" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="upost != null and upost!=''" >
+        #{upost,jdbcType=VARCHAR},
+      </if>
+      <if test="udept != null and udept!=''" >
+        #{udept,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.sys.entity.SMSysuser" >
+    update sm_sysuser
+    <set >
+      <if test="uname != null and uname!=''" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="uacc != null and uacc!=''" >
+        uacc = #{uacc,jdbcType=VARCHAR},
+      </if>
+      <if test="upass != null and upass!=''" >
+        upass = #{upass,jdbcType=VARCHAR},
+      </if>
+      <if test="1 == 1" >
+        lastlogin = now(),
+      </if>
+      <if test="urole != null and urole!=''" >
+        urole = #{urole,jdbcType=VARCHAR},
+      </if>
+      <if test="uphone != null and uphone!=''" >
+        uphone = #{uphone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null and status!=''" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="upost != null and upost!=''" >
+        upost = #{upost,jdbcType=VARCHAR},
+      </if>
+      <if test="udept != null and udept!=''" >
+        udept = #{udept,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.sys.entity.SMSysuser" >
+    update sm_sysuser
+    set uname = #{uname,jdbcType=VARCHAR},
+      uacc = #{uacc,jdbcType=VARCHAR},
+      upass = #{upass,jdbcType=VARCHAR},
+      inittime = #{inittime,jdbcType=TIMESTAMP},
+      lastlogin = #{lastlogin,jdbcType=TIMESTAMP},
+      urole = #{urole,jdbcType=VARCHAR},
+      uphone = #{uphone,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      upost = #{upost,jdbcType=VARCHAR},
+      udept = #{udept,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+</mapper>

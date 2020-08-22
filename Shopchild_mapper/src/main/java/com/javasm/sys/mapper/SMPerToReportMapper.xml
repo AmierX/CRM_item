@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.sys.mapper.SMPerToReportMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.sys.entity.SMPerToReport" >
+    <id column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="pacc" property="pacc" jdbcType="VARCHAR" />
+    <result column="pname" property="pname" jdbcType="VARCHAR" />
+    <result column="pdept" property="pdept" jdbcType="VARCHAR" />
+    <result column="pstatus" property="pstatus" jdbcType="VARCHAR" />
+    <result column="ppost" property="ppost" jdbcType="VARCHAR" />
+    <result column="prole" property="prole" jdbcType="VARCHAR" />
+    <result column="paname" property="paname" jdbcType="VARCHAR" />
+    <result column="poperation" property="poperation" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pid, pacc, pname, pdept, pstatus, ppost, prole, paname, poperation
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sm_pertoreport
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllPerToReport" resultMap="BaseResultMap" parameterType="com.javasm.sys.entity.SMPerToReport">
+    select
+    <include refid="Base_Column_List" />
+    from sm_pertoreport
+    <where>
+      <if test="pid!=null and pid!=''">
+        and pid=#{pid}
+      </if>
+      <if test="pname!=null and pname!=''">
+        and pname like "%"#{pname}"%"
+      </if>
+      <if test="pdept!=null and pdept!=''">
+        and pdept=#{pdept}
+      </if>
+      <if test="pacc!=null and pacc!=''">
+        and pacc like  "%"#{pacc}"%"
+      </if>
+      <if test="pstatus!=null and pstatus!=''">
+        and pstatus=#{pstatus}
+      </if>
+      <if test="ppost!=null and ppost!=''">
+        and ppost=#{ppost}
+      </if>
+      <if test="prole!=null and prole!=''">
+        and prole=#{prole}
+      </if>
+      <if test="paname!=null and paname!=''">
+        and paname=#{paname}
+      </if>
+      <if test="poperation!=null and poperation!=''">
+        and poperation=#{poperation}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sm_pertoreport
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.javasm.sys.entity.SMPerToReport" >
+    insert into sm_pertoreport (pid, pacc, pname, 
+      pdept, pstatus, ppost, 
+      prole, paname, poperation
+      )
+    values (#{pid,jdbcType=INTEGER}, #{pacc,jdbcType=VARCHAR}, #{pname,jdbcType=VARCHAR}, 
+      #{pdept,jdbcType=VARCHAR}, #{pstatus,jdbcType=VARCHAR}, #{ppost,jdbcType=VARCHAR}, 
+      #{prole,jdbcType=VARCHAR}, #{paname,jdbcType=VARCHAR}, #{poperation,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.sys.entity.SMPerToReport" >
+    insert into sm_pertoreport
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="pacc != null" >
+        pacc,
+      </if>
+      <if test="pname != null" >
+        pname,
+      </if>
+      <if test="pdept != null" >
+        pdept,
+      </if>
+      <if test="pstatus != null" >
+        pstatus,
+      </if>
+      <if test="ppost != null" >
+        ppost,
+      </if>
+      <if test="prole != null" >
+        prole,
+      </if>
+      <if test="paname != null" >
+        paname,
+      </if>
+      <if test="poperation != null" >
+        poperation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="pacc != null" >
+        #{pacc,jdbcType=VARCHAR},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pdept != null" >
+        #{pdept,jdbcType=VARCHAR},
+      </if>
+      <if test="pstatus != null" >
+        #{pstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="ppost != null" >
+        #{ppost,jdbcType=VARCHAR},
+      </if>
+      <if test="prole != null" >
+        #{prole,jdbcType=VARCHAR},
+      </if>
+      <if test="paname != null" >
+        #{paname,jdbcType=VARCHAR},
+      </if>
+      <if test="poperation != null" >
+        #{poperation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.sys.entity.SMPerToReport" >
+    update sm_pertoreport
+    <set >
+      <if test="pacc != null" >
+        pacc = #{pacc,jdbcType=VARCHAR},
+      </if>
+      <if test="pname != null" >
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pdept != null" >
+        pdept = #{pdept,jdbcType=VARCHAR},
+      </if>
+      <if test="pstatus != null" >
+        pstatus = #{pstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="ppost != null" >
+        ppost = #{ppost,jdbcType=VARCHAR},
+      </if>
+      <if test="prole != null" >
+        prole = #{prole,jdbcType=VARCHAR},
+      </if>
+      <if test="paname != null" >
+        paname = #{paname,jdbcType=VARCHAR},
+      </if>
+      <if test="poperation != null" >
+        poperation = #{poperation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.sys.entity.SMPerToReport" >
+    update sm_pertoreport
+    set pacc = #{pacc,jdbcType=VARCHAR},
+      pname = #{pname,jdbcType=VARCHAR},
+      pdept = #{pdept,jdbcType=VARCHAR},
+      pstatus = #{pstatus,jdbcType=VARCHAR},
+      ppost = #{ppost,jdbcType=VARCHAR},
+      prole = #{prole,jdbcType=VARCHAR},
+      paname = #{paname,jdbcType=VARCHAR},
+      poperation = #{poperation,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>

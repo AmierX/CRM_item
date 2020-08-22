@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> - Bootstrap Table</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../static/css/animate.css" rel="stylesheet">
+    <link href="../static/css/style.css?v=4.1.0" rel="stylesheet">
+    
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="ibox float-e-margins">
+            <div class="col-sm-12">
+                <!-- Example Events -->
+                <div class="example-wrap">
+                    <div class="example">
+                        <div class="btn-group hidden-xs" id="smlmTableToolbar" role="group">
+                            <form id="searchForm" class="form-inline">
+                                <div class="form-group">
+                                    <select id="lmodule" name="lmodule" class="form-control">
+                                        <option value="">所有访问模块</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select id="lcontext" name="lcontext" class="form-control">
+                                        <option value="">所有操作内容</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lname">访问用户名：</label>
+                                    <input type="text" class="form-control" name="lname" id="lname" placeholder="请输入访问用户名">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs searchBtn" type="button">搜索</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <table id="smlmTable" data-mobile-responsive="true"></table>
+                    </div>
+                </div>
+               <!-- End Example Events -->
+             </div>
+        </div>
+    </div>
+    <!-- End Panel Other -->
+
+    <!-- 全局js -->
+    <script src="../static/js/jquery.min.js?v=2.1.4"></script>
+    <script src="../static/js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- 自定义js -->
+    <script src="../static/js/content.js?v=1.0.0"></script>
+
+
+    <!-- Bootstrap table -->
+    <script src="../static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <!-- Peity -->
+    <script src="../static/js/jquery.serializejson.min.js"></script>
+    <script src="../static/js/plugins/layer/layer.min.js"></script>
+    <script src="../static/js/smlm.js"></script>
+
+
+
+</body>
+
+</html>

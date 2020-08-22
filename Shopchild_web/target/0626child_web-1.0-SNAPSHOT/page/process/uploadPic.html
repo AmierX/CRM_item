@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传流程图</title>
+
+    <script src="../../../static/js/baseurl.js"></script>
+    <link rel="shortcut icon" href="../../../static/img/favicon.ico">
+    <link href="../../../static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="../../../static/css/animate.css" rel="stylesheet">
+    <link href="../../../static/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="../../../static/css/layer/skin/layer.css"/>
+    <script type="text/javascript" src="../../static/js/jquery.min.js"></script><!--static/js/jquery.min.js-->
+    <script type="text/javascript" src="../../static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../../static/js/plugins/layer/layer.min.js"></script>
+    <script type="text/javascript" src="../../static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../static/js/serializeToObject.js"></script>
+    <script type="text/javascript" src="../../static/js/jquery.form.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-group">
+        <label for="plevel" class="col-sm-3 control-label">审批流程层级数</label>
+        <div class="col-sm-5">
+            <select class="selectpicker" id="plevel"  name="plevel" readonly="true">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label for="prole" class="col-sm-3 control-label">审批参与角色</label>
+        <div class="col-sm-5">
+            <select class="selectpicker" id="prole"  name="prole" readonly="true">
+                <option value="销售助理">销售助理</option>
+                <option value="采购助理">采购助理</option>
+                <option value="采购助理">采购助理</option>
+
+            </select>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <form  id="uploadForm"  method="post" enctype="multipart/form-data">
+            <input style="display:none;" id="procDefFile" type="file" name="procDefFile">
+
+        </form>
+    </div>
+<br/>
+    <input type="button"  id="putPic" class=" btn btn-success" value="上传"/>
+</div>
+<script>
+
+    $("#putPic").click(function () {
+        $("#procDefFile").click(); //表示执行点击
+        var plevel=$("#plevel").val();
+        var prole=$("#prole").val();
+          $("#uploadForm").prop("action",ctx+"/process/upload?level="+plevel+"&prole="+prole);
+        var options = {
+            url:ctx+"/process/upload?level="+plevel+"&prole="+prole,
+
+            success : function(result) {
+                // 重置文件域对象
+                //$("#uploadForm")[0].reset();
+                layer.msg(result.ms,{time:500});
+            }
+        };
+        $("#uploadForm").submit();
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.promotion.mapper.promotionMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.promotion.entity.Promotion" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="sname" property="sname" jdbcType="VARCHAR" />
+    <result column="sstime" property="sstime" jdbcType="VARCHAR" />
+    <result column="sprice" property="sprice" jdbcType="DOUBLE" />
+    <result column="sotime" property="sotime" jdbcType="VARCHAR" />
+    <result column="sapproval" property="sapproval" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, sname, sstime, sprice, sotime, sapproval
+  </sql>
+
+  <select id="selectAllPromotion" resultMap="BaseResultMap" parameterType="B2cSaleorder">
+    select
+    <include refid="Base_Column_List" />
+    from promotion
+    <where>
+      <if test="sid!=null and sid!=''">
+        and sid=#{sid}
+      </if>
+      <if test="sname!=null and sname!=''">
+        and sname=#{sname}
+      </if>
+      <if test="sstime!=null and sstime!=''">
+        and sstime=#{sstime}
+      </if>
+      <if test="sprice!=null and sprice!=''">
+        and sprice=#{sprice}
+      </if>
+      <if test="sotime!=null and sotime!=''">
+        and sotime=#{sotime}
+      </if>
+      <if test="sapproval!=null and sapproval!=''">
+        and sapproval=#{sapproval}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from promotion
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from promotion
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.javasm.promotion.entity.Promotion" >
+    insert into promotion (sid, sname, sstime, 
+      sprice, sotime, sapproval
+      )
+    values (#{sid,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, #{sstime,jdbcType=VARCHAR}, 
+      #{sprice,jdbcType=DOUBLE}, #{sotime,jdbcType=VARCHAR}, #{sapproval,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.promotion.entity.Promotion" >
+    insert into promotion
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="sname != null" >
+        sname,
+      </if>
+      <if test="sstime != null" >
+        sstime,
+      </if>
+      <if test="sprice != null" >
+        sprice,
+      </if>
+      <if test="sotime != null" >
+        sotime,
+      </if>
+      <if test="sapproval != null" >
+        sapproval,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sstime != null" >
+        #{sstime,jdbcType=VARCHAR},
+      </if>
+      <if test="sprice != null" >
+        #{sprice,jdbcType=DOUBLE},
+      </if>
+      <if test="sotime != null" >
+        #{sotime,jdbcType=VARCHAR},
+      </if>
+      <if test="sapproval != null" >
+        #{sapproval,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.promotion.entity.Promotion" >
+    update promotion
+    <set >
+      <if test="sname != null" >
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sstime != null" >
+        sstime = #{sstime,jdbcType=VARCHAR},
+      </if>
+      <if test="sprice != null" >
+        sprice = #{sprice,jdbcType=DOUBLE},
+      </if>
+      <if test="sotime != null" >
+        sotime = #{sotime,jdbcType=VARCHAR},
+      </if>
+      <if test="sapproval != null" >
+        sapproval = #{sapproval,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.promotion.entity.Promotion" >
+    update promotion
+    set sname = #{sname,jdbcType=VARCHAR},
+      sstime = #{sstime,jdbcType=VARCHAR},
+      sprice = #{sprice,jdbcType=DOUBLE},
+      sotime = #{sotime,jdbcType=VARCHAR},
+      sapproval = #{sapproval,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

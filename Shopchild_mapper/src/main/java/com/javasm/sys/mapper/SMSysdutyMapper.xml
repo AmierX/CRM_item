@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.sys.mapper.SMSysdutyMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.sys.entity.SMSysduty" >
+    <id column="duid" property="duid" jdbcType="INTEGER" />
+    <result column="duname" property="duname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    duid, duname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sm_duty
+    where duid = #{duid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllDuty" resultMap="BaseResultMap" parameterType="com.javasm.sys.entity.SMSysduty" >
+    select
+    <include refid="Base_Column_List" />
+    from sm_duty
+    <where>
+      <if test="duid!=null and duid != ''">
+        duid = #{duid}
+      </if>
+      <if test="duname != null and duname != ''">
+        duname = #{duname}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sm_duty
+    where duid = #{duid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.javasm.sys.entity.SMSysduty" >
+    insert into sm_duty (duid, duname)
+    values (#{duid,jdbcType=INTEGER}, #{duname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.sys.entity.SMSysduty" >
+    insert into sm_duty
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="duid != null" >
+        duid,
+      </if>
+      <if test="duname != null" >
+        duname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="duid != null" >
+        #{duid,jdbcType=INTEGER},
+      </if>
+      <if test="duname != null" >
+        #{duname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.sys.entity.SMSysduty" >
+    update sm_duty
+    <set >
+      <if test="duname != null" >
+        duname = #{duname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where duid = #{duid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.sys.entity.SMSysduty" >
+    update sm_duty
+    set duname = #{duname,jdbcType=VARCHAR}
+    where duid = #{duid,jdbcType=INTEGER}
+  </update>
+</mapper>

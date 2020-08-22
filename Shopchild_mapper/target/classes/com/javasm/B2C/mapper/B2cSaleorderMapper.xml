@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.B2C.mapper.B2cSaleorderMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.B2C.entity.B2cSaleorder" >
+    <id column="b2cId" property="b2cId" jdbcType="INTEGER" />
+    <result column="b2cNum" property="b2cNum" jdbcType="INTEGER" />
+    <result column="b2cOrderType" property="b2cOrderType" jdbcType="VARCHAR" />
+    <result column="b2cOrderHandle" property="b2cOrderHandle" jdbcType="VARCHAR" />
+    <result column="b2cService" property="b2cService" jdbcType="VARCHAR" />
+    <result column="b2cPayType" property="b2cPayType" jdbcType="VARCHAR" />
+    <result column="b2cPost" property="b2cPost" jdbcType="VARCHAR" />
+    <result column="b2corderStatus" property="b2corderStatus" jdbcType="VARCHAR" />
+    <result column="b2cInitDate" property="b2cInitDate" jdbcType="TIMESTAMP" />
+    <result column="b2cdorderStatus" property="b2cdorderStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    b2cId, b2cNum, b2cOrderType, b2cOrderHandle, b2cService, b2cPayType, b2cPost, b2corderStatus
+  </sql>
+  <sql id="Base_Column_List1" >
+    b2cId, b2cNum, b2cOrderType, b2cOrderHandle, b2cService, b2cPayType, b2cInitDate, b2cdorderStatus
+  </sql>
+
+  <select id="selectOneSaleorder" resultMap="BaseResultMap" parameterType="B2cSaleorder">
+    select
+    <include refid="Base_Column_List1" />
+    from b2c_saleorder
+    <where>
+      <if test="b2cId!=null and b2cId!=''">
+        and b2cId=#{b2cId}
+      </if>
+      <if test="b2cNum!=null and b2cNum!=''">
+        and b2cNum=#{b2cNum}
+      </if>
+      <if test="b2cOrderType!=null and b2cOrderType!=''">
+        and b2cOrderType=#{b2cOrderType}
+      </if>
+      <if test="b2cPayType!=null and b2cPayType!=''">
+        and b2cPayType=#{b2cPayType}
+      </if>
+      <if test="b2cService!=null and b2cService!=''">
+        and b2cService=#{b2cService}
+      </if>
+      <if test="b2cOrderHandle!=null and b2cOrderHandle!=''">
+        and b2cOrderHandle=#{b2cOrderHandle}
+      </if>
+      <if test="b2cdorderStatus!=null and b2cdorderStatus!=''">
+        and b2cdorderStatus=#{b2cdorderStatus}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectAllSaleorder" resultMap="BaseResultMap" parameterType="B2cSaleorder">
+    select
+    <include refid="Base_Column_List" />
+    from b2c_saleorder
+    <where>
+      <if test="b2cId!=null and b2cId!=''">
+        and b2cId=#{b2cId}
+      </if>
+      <if test="b2cNum!=null and b2cNum!=''">
+        and b2cNum=#{b2cNum}
+      </if>
+      <if test="b2cOrderType!=null and b2cOrderType!=''">
+        and b2cOrderType=#{b2cOrderType}
+      </if>
+      <if test="b2cPayType!=null and b2cPayType!=''">
+        and b2cPayType=#{b2cPayType}
+      </if>
+      <if test="b2cService!=null and b2cService!=''">
+        and b2cService=#{b2cService}
+      </if>
+      <if test="b2cOrderHandle!=null and b2cOrderHandle!=''">
+        and b2cOrderHandle=#{b2cOrderHandle}
+      </if>
+      <if test="b2corderStatus!=null and b2corderStatus!=''">
+        and b2corderStatus=#{b2corderStatus}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b2c_saleorder
+    where b2cId = #{b2cid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b2c_saleorder
+    where b2cId = #{b2cid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.javasm.B2C.entity.B2cSaleorder" >
+    insert into b2c_saleorder (b2cId, b2cNum, b2cOrderType, 
+      b2cOrderHandle, b2cService, b2cPayType, 
+      b2cPost, b2corderStatus, b2cInitDate, 
+      b2cdorderStatus)
+    values (#{b2cid,jdbcType=INTEGER}, #{b2cnum,jdbcType=INTEGER}, #{b2cordertype,jdbcType=VARCHAR}, 
+      #{b2corderhandle,jdbcType=VARCHAR}, #{b2cservice,jdbcType=VARCHAR}, #{b2cpaytype,jdbcType=VARCHAR}, 
+      #{b2cpost,jdbcType=VARCHAR}, #{b2corderstatus,jdbcType=VARCHAR}, #{b2cinitdate,jdbcType=TIMESTAMP}, 
+      #{b2cdorderstatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.B2C.entity.B2cSaleorder" >
+    insert into b2c_saleorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="b2cid != null" >
+        b2cId,
+      </if>
+      <if test="b2cnum != null" >
+        b2cNum,
+      </if>
+      <if test="b2cordertype != null" >
+        b2cOrderType,
+      </if>
+      <if test="b2corderhandle != null" >
+        b2cOrderHandle,
+      </if>
+      <if test="b2cservice != null" >
+        b2cService,
+      </if>
+      <if test="b2cpaytype != null" >
+        b2cPayType,
+      </if>
+      <if test="b2cpost != null" >
+        b2cPost,
+      </if>
+      <if test="b2corderstatus != null" >
+        b2corderStatus,
+      </if>
+      <if test="b2cinitdate != null" >
+        b2cInitDate,
+      </if>
+      <if test="b2cdorderstatus != null" >
+        b2cdorderStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="b2cid != null" >
+        #{b2cid,jdbcType=INTEGER},
+      </if>
+      <if test="b2cnum != null" >
+        #{b2cnum,jdbcType=INTEGER},
+      </if>
+      <if test="b2cordertype != null" >
+        #{b2cordertype,jdbcType=VARCHAR},
+      </if>
+      <if test="b2corderhandle != null" >
+        #{b2corderhandle,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cservice != null" >
+        #{b2cservice,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cpaytype != null" >
+        #{b2cpaytype,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cpost != null" >
+        #{b2cpost,jdbcType=VARCHAR},
+      </if>
+      <if test="b2corderstatus != null" >
+        #{b2corderstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cinitdate != null" >
+        #{b2cinitdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="b2cdorderstatus != null" >
+        #{b2cdorderstatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.B2C.entity.B2cSaleorder" >
+    update b2c_saleorder
+    <set >
+      <if test="b2cnum != null" >
+        b2cNum = #{b2cnum,jdbcType=INTEGER},
+      </if>
+      <if test="b2cordertype != null" >
+        b2cOrderType = #{b2cordertype,jdbcType=VARCHAR},
+      </if>
+      <if test="b2corderhandle != null" >
+        b2cOrderHandle = #{b2corderhandle,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cservice != null" >
+        b2cService = #{b2cservice,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cpaytype != null" >
+        b2cPayType = #{b2cpaytype,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cpost != null" >
+        b2cPost = #{b2cpost,jdbcType=VARCHAR},
+      </if>
+      <if test="b2corderstatus != null" >
+        b2corderStatus = #{b2corderstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cinitdate != null" >
+        b2cInitDate = #{b2cinitdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="b2cdorderstatus != null" >
+        b2cdorderStatus = #{b2cdorderstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where b2cId = #{b2cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.B2C.entity.B2cSaleorder" >
+    update b2c_saleorder
+    set b2cNum = #{b2cnum,jdbcType=INTEGER},
+      b2cOrderType = #{b2cordertype,jdbcType=VARCHAR},
+      b2cOrderHandle = #{b2corderhandle,jdbcType=VARCHAR},
+      b2cService = #{b2cservice,jdbcType=VARCHAR},
+      b2cPayType = #{b2cpaytype,jdbcType=VARCHAR},
+      b2cPost = #{b2cpost,jdbcType=VARCHAR},
+      b2corderStatus = #{b2corderstatus,jdbcType=VARCHAR},
+      b2cInitDate = #{b2cinitdate,jdbcType=TIMESTAMP},
+      b2cdorderStatus = #{b2cdorderstatus,jdbcType=VARCHAR}
+    where b2cId = #{b2cid,jdbcType=INTEGER}
+  </update>
+</mapper>

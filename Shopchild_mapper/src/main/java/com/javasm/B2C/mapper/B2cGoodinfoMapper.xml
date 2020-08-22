@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.B2C.mapper.B2cGoodinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.B2C.entity.B2cGoodinfo" >
+    <id column="b2cgId" property="b2cgId" jdbcType="INTEGER" />
+    <result column="b2cgOrderNum" property="b2cgOrderNum" jdbcType="INTEGER" />
+    <result column="b2cgCode" property="b2cgCode" jdbcType="INTEGER" />
+    <result column="b2cgName" property="b2cgName" jdbcType="VARCHAR" />
+    <result column="b2cgPrice" property="b2cgPrice" jdbcType="DOUBLE" />
+    <result column="b2cgNum" property="b2cgNum" jdbcType="INTEGER" />
+    <result column="b2cgTProce" property="b2cgTProce" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    b2cgId, b2cgOrderNum, b2cgCode, b2cgName, b2cgPrice, b2cgNum, b2cgTProce
+  </sql>
+
+  <select id="selectGoodByNum" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from b2c_goodinfo
+    <where>
+      <if test="b2cgOrderNum!=null and b2cgOrderNum!=''">
+        and b2cgOrderNum=#{b2cgOrderNum}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from b2c_goodinfo
+    where b2cgId = #{b2cgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b2c_goodinfo
+    where b2cgId = #{b2cgId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.javasm.B2C.entity.B2cGoodinfo" >
+    insert into b2c_goodinfo (b2cgId, b2cgOrderNum, b2cgCode,
+      b2cgName, b2cgPrice, b2cgNum,
+      b2cgTProce)
+    values (#{b2cgId,jdbcType=INTEGER}, #{b2cgOrderNum,jdbcType=INTEGER}, #{b2cgCode,jdbcType=INTEGER},
+      #{b2cgName,jdbcType=VARCHAR}, #{b2cgPrice,jdbcType=DOUBLE}, #{b2cgNum,jdbcType=INTEGER},
+      #{b2cgTProce,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.B2C.entity.B2cGoodinfo" >
+    insert into b2c_goodinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="b2cgId != null" >
+        b2cgId,
+      </if>
+      <if test="b2cgOrderNum != null" >
+        b2cgOrderNum,
+      </if>
+      <if test="b2cgCode != null" >
+        b2cgCode,
+      </if>
+      <if test="b2cgName != null" >
+        b2cgName,
+      </if>
+      <if test="b2cgPrice != null" >
+        b2cgPrice,
+      </if>
+      <if test="b2cgNum != null" >
+        b2cgNum,
+      </if>
+      <if test="b2cgTProce != null" >
+        b2cgTProce,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="b2cgId != null" >
+        #{b2cgId,jdbcType=INTEGER},
+      </if>
+      <if test="b2cgOrderNum != null" >
+        #{b2cgOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="b2cgCode != null" >
+        #{b2cgCode,jdbcType=INTEGER},
+      </if>
+      <if test="b2cgName != null" >
+        #{b2cgName,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cgPrice != null" >
+        #{b2cgPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="b2cgNum != null" >
+        #{b2cgNum,jdbcType=INTEGER},
+      </if>
+      <if test="b2cgTProce != null" >
+        #{b2cgTProce,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.B2C.entity.B2cGoodinfo" >
+    update b2c_goodinfo
+    <set >
+      <if test="b2cgOrderNum != null" >
+        b2cgOrderNum = #{b2cgOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="b2cgCode != null" >
+        b2cgCode = #{b2cgCode,jdbcType=INTEGER},
+      </if>
+      <if test="b2cgName != null" >
+        b2cgName = #{b2cgName,jdbcType=VARCHAR},
+      </if>
+      <if test="b2cgPrice != null" >
+        b2cgPrice = #{b2cgPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="b2cgNum != null" >
+        b2cgNum = #{b2cgNum,jdbcType=INTEGER},
+      </if>
+      <if test="b2cgTProce != null" >
+        b2cgTProce = #{b2cgTProce,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where b2cgId = #{b2cgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.B2C.entity.B2cGoodinfo" >
+    update b2c_goodinfo
+    set b2cgOrderNum = #{b2cgOrderNum,jdbcType=INTEGER},
+      b2cgCode = #{b2cgCode,jdbcType=INTEGER},
+      b2cgName = #{b2cgName,jdbcType=VARCHAR},
+      b2cgPrice = #{b2cgPrice,jdbcType=DOUBLE},
+      b2cgNum = #{b2cgNum,jdbcType=INTEGER},
+      b2cgTProce = #{b2cgTProce,jdbcType=DOUBLE}
+    where b2cgId = #{b2cgId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.B2C.mapper.B2cReturngoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.B2C.entity.B2cReturngoods" >
+    <id column="b2crdId" property="b2crdId" jdbcType="INTEGER" />
+    <result column="b2crdInitName" property="b2crdInitName" jdbcType="VARCHAR" />
+    <result column="b2crdInitDate" property="b2crdInitDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    b2crdNum,b2crdId, b2crdInitName, b2crdInitDate, b2crdNum
+  </sql>
+
+  <select id="selectB2cReturngoodsByNum" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"></include>
+    from b2c_returngoods
+    <where>
+      <if test="b2crdId!=null and b2crdId!=''">
+        and b2crdId=#{b2crdId}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectAllB2cReturngoods" resultMap="BaseResultMap" parameterType="B2cReturngoods">
+    select u.*,d.b2crOrderOdd from b2c_returngoods u,b2c_returnorder d
+    <where>
+      and d.b2crOrderNum=u.b2crdId
+      <if test="b2crdId!=null and b2crdId!=''">
+        and u.b2crdId=#{b2crdId}
+      </if>
+      <if test="returnorder!=null">
+        <if test="returnorder.getB2crOrderOdd!=null and returnorder.getB2cService!=''">
+          and d.b2cService=#{returnorder.getB2crOrderOdd}
+        </if>
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b2c_returngoods
+    where b2crdId = #{b2crdId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b2c_returngoods
+    where b2crdId = #{b2crdId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.javasm.B2C.entity.B2cReturngoods" >
+    insert into b2c_returngoods (b2crdId, b2crdInitName, b2crdInitDate
+      )
+    values (#{b2crdId,jdbcType=INTEGER}, #{b2crdInitName,jdbcType=VARCHAR}, #{b2crdInitDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.B2C.entity.B2cReturngoods" >
+    insert into b2c_returngoods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="b2crdId != null" >
+        b2crdId,
+      </if>
+      <if test="b2crdInitName != null" >
+        b2crdInitName,
+      </if>
+      <if test="b2crdInitDate != null" >
+        b2crdInitDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="b2crdId != null" >
+        #{b2crdId,jdbcType=INTEGER},
+      </if>
+      <if test="b2crdInitName != null" >
+        #{b2crdInitName,jdbcType=VARCHAR},
+      </if>
+      <if test="b2crdInitDate != null" >
+        #{b2crdInitDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.B2C.entity.B2cReturngoods" >
+    update b2c_returngoods
+    <set >
+      <if test="b2crdInitName != null" >
+        b2crdInitName = #{b2crdInitName,jdbcType=VARCHAR},
+      </if>
+      <if test="b2crdInitDate != null" >
+        b2crdInitDate = #{b2crdInitDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where b2crdId = #{b2crdId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.B2C.entity.B2cReturngoods" >
+    update b2c_returngoods
+    set b2crdInitName = #{b2crdInitName,jdbcType=VARCHAR},
+      b2crdInitDate = #{b2crdInitDate,jdbcType=TIMESTAMP}
+    where b2crdId = #{b2crdId,jdbcType=INTEGER}
+  </update>
+</mapper>

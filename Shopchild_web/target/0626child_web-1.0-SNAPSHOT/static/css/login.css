@@ -1,0 +1,18 @@
+body {
+    background-image: url("../img/logingroundimg.jpg");
+}
+
+#main {
+    margin: auto;
+    width: 500px;
+    height: 230px;
+    padding: 20px;
+}
+
+#title {
+    margin: 130px auto 30px;
+    font-size: xx-large;
+    color: whitesmoke;
+    width: 400px;
+    height: 150px;
+}

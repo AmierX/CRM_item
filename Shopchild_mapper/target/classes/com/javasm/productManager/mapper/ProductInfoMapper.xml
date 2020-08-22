@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.productManager.mapper.ProductInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.productManager.entity.ProductInfo" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="sname" property="sname" jdbcType="CHAR" />
+    <result column="stype" property="stype" jdbcType="CHAR" />
+    <result column="sbrand" property="sbrand" jdbcType="CHAR" />
+    <result column="smodel" property="smodel" jdbcType="CHAR" />
+    <result column="scolor" property="scolor" jdbcType="CHAR" />
+    <result column="sstorecode" property="sstorecode" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="showMap" type="com.javasm.productManager.entity.ProductInfo" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="sname" property="sname" jdbcType="CHAR" />
+    <result column="tname" property="stype" jdbcType="CHAR" />
+    <result column="brandname" property="sbrand" jdbcType="CHAR" />
+    <result column="smodel" property="smodel" jdbcType="CHAR" />
+    <result column="scolor" property="scolor" jdbcType="CHAR" />
+    <result column="sstorecode" property="sstorecode" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sid, sname, stype, sbrand, smodel, scolor, sstorecode
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.javasm.productManager.entity.ProductInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_product
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_product
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.javasm.productManager.entity.ProductInfoExample" >
+    delete from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.javasm.productManager.entity.ProductInfo" >
+    insert into t_product (sid, sname, stype, 
+      sbrand, smodel, scolor, sstorecode
+      )
+    values (#{sid,jdbcType=INTEGER}, #{sname,jdbcType=CHAR}, #{stype,jdbcType=CHAR}, 
+      #{sbrand,jdbcType=CHAR}, #{smodel,jdbcType=CHAR}, #{scolor,jdbcType=CHAR}, #{sstorecode,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.productManager.entity.ProductInfo" >
+    insert into t_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="sname != null" >
+        sname,
+      </if>
+      <if test="stype != null" >
+        stype,
+      </if>
+      <if test="sbrand != null" >
+        sbrand,
+      </if>
+      <if test="smodel != null" >
+        smodel,
+      </if>
+      <if test="scolor != null" >
+        scolor,
+      </if>
+      <if test="sstorecode != null" >
+        sstorecode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=CHAR},
+      </if>
+      <if test="stype != null" >
+        #{stype,jdbcType=CHAR},
+      </if>
+      <if test="sbrand != null" >
+        #{sbrand,jdbcType=CHAR},
+      </if>
+      <if test="smodel != null" >
+        #{smodel,jdbcType=CHAR},
+      </if>
+      <if test="scolor != null" >
+        #{scolor,jdbcType=CHAR},
+      </if>
+      <if test="sstorecode != null" >
+        #{sstorecode,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.javasm.productManager.entity.ProductInfoExample" resultType="java.lang.Integer" >
+    select count(*) from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_product
+    <set >
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sname != null" >
+        sname = #{record.sname,jdbcType=CHAR},
+      </if>
+      <if test="record.stype != null" >
+        stype = #{record.stype,jdbcType=CHAR},
+      </if>
+      <if test="record.sbrand != null" >
+        sbrand = #{record.sbrand,jdbcType=CHAR},
+      </if>
+      <if test="record.smodel != null" >
+        smodel = #{record.smodel,jdbcType=CHAR},
+      </if>
+      <if test="record.scolor != null" >
+        scolor = #{record.scolor,jdbcType=CHAR},
+      </if>
+      <if test="record.sstorecode != null" >
+        sstorecode = #{record.sstorecode,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_product
+    set sid = #{record.sid,jdbcType=INTEGER},
+      sname = #{record.sname,jdbcType=CHAR},
+      stype = #{record.stype,jdbcType=CHAR},
+      sbrand = #{record.sbrand,jdbcType=CHAR},
+      smodel = #{record.smodel,jdbcType=CHAR},
+      scolor = #{record.scolor,jdbcType=CHAR},
+      sstorecode = #{record.sstorecode,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.productManager.entity.ProductInfo" >
+    update t_product
+    <set >
+      <if test="sname != null" >
+        sname = #{sname,jdbcType=CHAR},
+      </if>
+      <if test="stype != null" >
+        stype = #{stype,jdbcType=CHAR},
+      </if>
+      <if test="sbrand != null" >
+        sbrand = #{sbrand,jdbcType=CHAR},
+      </if>
+      <if test="smodel != null" >
+        smodel = #{smodel,jdbcType=CHAR},
+      </if>
+      <if test="scolor != null" >
+        scolor = #{scolor,jdbcType=CHAR},
+      </if>
+      <if test="sstorecode != null" >
+        sstorecode = #{sstorecode,jdbcType=CHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.productManager.entity.ProductInfo" >
+    update t_product
+    set sname = #{sname,jdbcType=CHAR},
+      stype = #{stype,jdbcType=CHAR},
+      sbrand = #{sbrand,jdbcType=CHAR},
+      smodel = #{smodel,jdbcType=CHAR},
+      scolor = #{scolor,jdbcType=CHAR},
+      sstorecode = #{sstorecode,jdbcType=CHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <!--自定义-->
+  <!--<select id="selectByPage" resultMap="BaseResultMap">-->
+      <!--select * from t_product limit #{index},#{size}-->
+
+  <!--</select>-->
+  <select id="selectByPage" resultMap="showMap">
+  select p.`sid`,p.`sname`,p.`smodel`,p.`scolor`,p.`sstorecode`,t.tname,b.brandname from t_product p left join producttype t on p.`stype`=t.`tid` left join commoditybrand b on p.`sbrand`=b.`brandid` limit #{index},#{size}
+
+  </select>
+
+<insert id="add" useGeneratedKeys="true" keyProperty="sid">
+  insert  into t_product(sname,stype,sbrand,smodel,scolor,sstorecode) values(#{sname},#{stype},#{sbrand},#{smodel},#{scolor},#{sstorecode})
+
+</insert>
+</mapper>

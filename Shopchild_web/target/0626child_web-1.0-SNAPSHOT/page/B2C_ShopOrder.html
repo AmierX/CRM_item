@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>B2CSaleOrder</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../static/css/animate.css" rel="stylesheet">
+    <link href="../static/css/style.css?v=4.1.0" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/layui.css">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins">
+
+        <div class="col-sm-12">
+            <!-- Example Events -->
+            <div class="example-wrap">
+                <div class="example">
+                    <button type="button" class="layui-btn" id="test1">
+                        <i class="layui-icon"></i>导入
+                    </button>
+                    <form id="selectUserCondition" class="form-inline">
+                        <div class="form-group">
+                            <label for="exampleInputSnumber2">订单编号:</label>
+                            <input type="text" name="b2cNum" class="form-control" id="exampleInputSnumber2"
+                                   placeholder="请输入订单编号">
+                        </div>
+                        <div class="form-group">
+                            <select name="b2cwOrderType" class="form-control">
+                                <option value="">订单类型</option>
+                                <option value="淘宝网店">淘宝网店</option>
+                                <option value="当当网店">当当网店</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="b2cPayType" class="form-control">
+                                <option value="">支付方式</option>
+                                <option value="货到付款">货到付款</option>
+                                <option value="款到发货">款到发货</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="b2cService" class="form-control">
+                                <option value="">业务类型</option>
+                                <option value="普通业务">普通业务</option>
+                                <option value="号卡套餐">号卡套餐</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="b2cOrderHandle" class="form-control">
+                                <option value="">订单状态</option>
+                                <option value="已发货">已发货</option>
+                                <option value="已到货">已到货</option>
+                                <option value="已归档">已归档</option>
+                            </select>
+                        </div>
+                        <button id="conditionSelectBtn" type="button" class="btn btn-default">搜索</button>
+                    </form>
+                    <table id="usersTable" data-mobile-responsive="true">
+                    </table>
+                </div>
+            </div>
+            <!-- End Example Events -->
+        </div>
+    </div>
+</div>
+</div>
+<!-- End Panel Other -->
+</div>
+
+
+<!-- 全局js -->
+<script type="text/javascript" src="../static/js/jquery.min.js?v=2.1.4"></script>
+<script type="text/javascript" src="../static/js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script type="text/javascript" src="../static/js/content.js?v=1.0.0"></script>
+
+<!-- Bootstrap table -->
+<script type="text/javascript" src="../static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script type="text/javascript" src="../static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<!-- Peity -->
+<script type="text/javascript" src="../static/js/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="../static/js/plugins/layer/layer.min.js"></script>
+<script type="text/javascript" src="../static/js/B2C_ShopOrder.js"></script>
+<script type="text/javascript" src="../static/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="../static/layui.all.js"></script>
+
+
+</body>
+
+</html>

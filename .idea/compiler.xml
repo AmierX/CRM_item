@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Shopchild_mapper" />
+        <module name="Shopchild_web" />
+        <module name="Shopchild_service" />
+      </profile>
+      <profile name="Annotation profile for Shopchild_entity" enabled="true">
+        <sourceOutputDir name="../0626child_entity/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../0626child_entity/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Shopchild_entity" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Shopchild_entity" target="1.8" />
+      <module name="Shopchild_mapper" target="1.8" />
+      <module name="Shopchild_service" target="1.8" />
+      <module name="Shopchild_web" target="1.8" />
+      <module name="trunk" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

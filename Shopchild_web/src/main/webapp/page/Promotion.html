@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>B2CSaleOrder</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../static/css/animate.css" rel="stylesheet">
+    <link href="../static/css/style.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins">
+
+        <div class="col-sm-12">
+            <!-- Example Events -->
+            <div class="example-wrap">
+                <div class="example">
+                    <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
+                        <button  type="button" class="btn btn-outline btn-default add">
+                            添加
+                        </button>
+                        <button class='btn btn-default updatebtn'>修改</button>
+                        <button class='btn btn-danger debtn'>删除</button>
+                    </div>
+                </div>
+                <form id="selectUserCondition" class="form-inline">
+                    <div class="form-group">
+                        <label for="exampleInputSnumber2">活动编号:</label>
+                        <input type="text" name="sid" class="form-control" id="exampleInputSnumber1"
+                               placeholder="请输入活动编号">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputSnumber2">开始时间:</label>
+                        <input type="text" name="sstime" class="form-control" id="exampleInputSnumber2"
+                               placeholder="请输入开始时间">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputSnumber2">结束时间:</label>
+                        <input type="text" name="sotime" class="form-control" id="exampleInputSnumber3"
+                               placeholder="请输入结束时间">
+                    </div>
+                    <div class="form-group">
+                        <select name="b2cOrderType" class="form-control">
+                            <option value="">审批状态</option>
+                            <option value="未审核">未审核</option>
+                            <option value="已审核">已审核</option>
+                            <option value="审核不同过">审核不同过</option>
+                        </select>
+                    </div>
+                    <button id="conditionSelectBtn" type="button" class="btn btn-default">搜索</button>
+                </form>
+                <table id="usersTable" data-mobile-responsive="true">
+                </table>
+            </div>
+        </div>
+        <!-- End Example Events -->
+    </div>
+</div>
+</div>
+</div>
+<!-- End Panel Other -->
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">巴拉巴拉</h4>
+                <input type="hidden" id="formtype" value="">
+            </div>
+            <div class="modal-body">
+                <form role="form" id="addForm">
+                    <input type="hidden" name="sid" value="">
+                    <input type="hidden" name="b2cOrderType" value="">
+                    <div class="form-group">
+                        <label for="sname">活动名称</label>
+                        <input type="text" class="form-control" name="sname" id="sname" placeholder="请输入">
+                    </div>
+                    <div class="form-group">
+                        <label for="sprice">价格</label>
+                        <input type="text" class="form-control" name="sprice" id="sprice" placeholder="请输入">
+                    </div>
+                    <div class="form-group">
+                        <label for="sstime">开始时间</label>
+                        <input type="text" class="form-control" name="sstime" id="sstime" placeholder="请输入">
+                    </div>
+                    <div class="form-group">
+                        <label for="sotime">结束时间</label>
+                        <input type="text" class="form-control" name="sotime" id="sotime" placeholder="请输入">
+                    </div>
+                    <div class="form-group">
+                        <label for="sname1">备注</label>
+                        <input type="text" class="form-control" name="sname1" id="sname1" placeholder="">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="SaveBtn">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 全局js -->
+<script type="text/javascript" src="../static/js/jquery.min.js?v=2.1.4"></script>
+<script type="text/javascript" src="../static/js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script type="text/javascript" src="../static/js/content.js?v=1.0.0"></script>
+
+<!-- Bootstrap table -->
+<script type="text/javascript" src="../static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script type="text/javascript" src="../static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<!-- Peity -->
+<script type="text/javascript" src="../static/js/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="../static/js/plugins/layer/layer.min.js"></script>
+<script type="text/javascript" src="../static/js/Promotion.js"></script>
+
+</body>
+
+</html>

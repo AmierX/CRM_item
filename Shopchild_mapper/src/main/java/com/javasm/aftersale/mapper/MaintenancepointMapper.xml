@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.aftersale.mapper.MaintenancepointMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.aftersale.entity.Maintenancepoint" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="companyname" property="companyname" jdbcType="VARCHAR" />
+    <result column="companysite" property="companysite" jdbcType="VARCHAR" />
+    <result column="hotline" property="hotline" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, companyname, companysite, hotline
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_maintenancepoint
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectMaintenance" resultType="Maintenancepoint" parameterType="Maintenancepoint" >
+    select
+    <include refid="Base_Column_List" />
+    from s_maintenancepoint
+    <where>
+      <if test="companyname!=null and companyname!=''">
+        and companyname = #{companyname}
+      </if>
+      <if test="companysite!=null and companysite!=''">
+        and companysite = #{companysite}
+      </if>
+      <if test="hotline!=null and hotline!=''">
+        and hotline = #{hotline}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from s_maintenancepoint
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteMaintenance">
+    delete from s_maintenancepoint where id in
+    <foreach collection="array" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
+
+  <insert id="insert" parameterType="com.javasm.aftersale.entity.Maintenancepoint" >
+    insert into s_maintenancepoint (id, companyname, companysite,
+      hotline)
+    values (#{id,jdbcType=INTEGER}, #{companyname,jdbcType=VARCHAR}, #{companysite,jdbcType=VARCHAR},
+      #{hotline,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.aftersale.entity.Maintenancepoint" >
+    insert into s_maintenancepoint
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="companyname != null" >
+        companyname,
+      </if>
+      <if test="companysite != null" >
+        companysite,
+      </if>
+      <if test="hotline != null" >
+        hotline,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="companysite != null" >
+        #{companysite,jdbcType=VARCHAR},
+      </if>
+      <if test="hotline != null" >
+        #{hotline,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.aftersale.entity.Maintenancepoint" >
+    update s_maintenancepoint
+    <set >
+      <if test="companyname != null" >
+        companyname = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="companysite != null" >
+        companysite = #{companysite,jdbcType=VARCHAR},
+      </if>
+      <if test="hotline != null" >
+        hotline = #{hotline,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.aftersale.entity.Maintenancepoint" >
+    update s_maintenancepoint
+    set companyname = #{companyname,jdbcType=VARCHAR},
+      companysite = #{companysite,jdbcType=VARCHAR},
+      hotline = #{hotline,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

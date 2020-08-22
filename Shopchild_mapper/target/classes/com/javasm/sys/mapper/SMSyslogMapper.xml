@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.sys.mapper.SMSyslogMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.sys.entity.SMSyslog" >
+    <id column="lid" property="lid" jdbcType="INTEGER" />
+    <result column="ltime" property="ltime" jdbcType="TIMESTAMP" />
+    <result column="lname" property="lname" jdbcType="VARCHAR" />
+    <result column="lmodule" property="lmodule" jdbcType="VARCHAR" />
+    <result column="lcontext" property="lcontext" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    lid, ltime, lname, lmodule, lcontext
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sm_syslog
+    where lid = #{lid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllSyslog" resultMap="BaseResultMap" parameterType="com.javasm.sys.entity.SMSyslog">
+    select
+    <include refid="Base_Column_List" />
+    from sm_syslog
+    <where>
+      <if test="lid != null and lid != ''" >
+        and lid=#{lid}
+      </if>
+      <if test="ltime != null and ltime != ''" >
+        and ltime=#{ltime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lname != null and lname != ''" >
+        and lname=#{lname}
+      </if>
+      <if test="lmodule != null and lmodule != ''" >
+        and lmodule=#{lmodule}
+      </if>
+      <if test="lcontext != null and lcontext != ''" >
+        and lcontext=#{lcontext}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sm_syslog
+    where lid = #{lid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.javasm.sys.entity.SMSyslog" >
+    insert into sm_syslog (lid, ltime, lname, 
+      lmodule, lcontext)
+    values (#{lid,jdbcType=INTEGER}, #{ltime,jdbcType=TIMESTAMP}, #{lname,jdbcType=VARCHAR}, 
+      #{lmodule,jdbcType=VARCHAR}, #{lcontext,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.sys.entity.SMSyslog" >
+    insert into sm_syslog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lid != null" >
+        lid,
+      </if>
+      <if test="ltime != null" >
+        ltime,
+      </if>
+      <if test="lname != null" >
+        lname,
+      </if>
+      <if test="lmodule != null" >
+        lmodule,
+      </if>
+      <if test="lcontext != null" >
+        lcontext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lid != null" >
+        #{lid,jdbcType=INTEGER},
+      </if>
+      <if test="ltime != null" >
+        #{ltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lname != null" >
+        #{lname,jdbcType=VARCHAR},
+      </if>
+      <if test="lmodule != null" >
+        #{lmodule,jdbcType=VARCHAR},
+      </if>
+      <if test="lcontext != null" >
+        #{lcontext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByLnameSelective" parameterType="com.javasm.sys.entity.SMSyslog" >
+    update sm_syslog
+    <set >
+      <if test="1==1" >
+        ltime = now(),
+      </if>
+      <if test="lmodule != null" >
+        lmodule = #{lmodule,jdbcType=VARCHAR},
+      </if>
+      <if test="lcontext != null" >
+        lcontext = #{lcontext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lname = #{lname,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.sys.entity.SMSyslog" >
+    update sm_syslog
+    set ltime = #{ltime,jdbcType=TIMESTAMP},
+      lname = #{lname,jdbcType=VARCHAR},
+      lmodule = #{lmodule,jdbcType=VARCHAR},
+      lcontext = #{lcontext,jdbcType=VARCHAR}
+    where lid = #{lid,jdbcType=INTEGER}
+  </update>
+</mapper>

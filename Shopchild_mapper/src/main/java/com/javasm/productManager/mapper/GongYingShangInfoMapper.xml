@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.productManager.mapper.GongYingShangInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.productManager.entity.GongYingShangInfo" >
+    <id column="gid" property="gid" jdbcType="INTEGER" />
+    <result column="gname" property="gname" jdbcType="CHAR" />
+    <result column="glinkman" property="glinkman" jdbcType="CHAR" />
+    <result column="gphone" property="gphone" jdbcType="CHAR" />
+    <result column="gadress" property="gadress" jdbcType="CHAR" />
+    <result column="gaccount" property="gaccount" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    gid, gname, glinkman, gphone, gadress, gaccount
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.javasm.productManager.entity.GongYingShangInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_gongyingshang
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_gongyingshang
+    where gid = #{gid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_gongyingshang
+    where gid = #{gid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.javasm.productManager.entity.GongYingShangInfoExample" >
+    delete from t_gongyingshang
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.javasm.productManager.entity.GongYingShangInfo" >
+    insert into t_gongyingshang (gid, gname, glinkman, 
+      gphone, gadress, gaccount)
+    values (#{gid,jdbcType=INTEGER}, #{gname,jdbcType=CHAR}, #{glinkman,jdbcType=CHAR}, 
+      #{gphone,jdbcType=CHAR}, #{gadress,jdbcType=CHAR}, #{gaccount,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.productManager.entity.GongYingShangInfo" >
+    insert into t_gongyingshang
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gid != null" >
+        gid,
+      </if>
+      <if test="gname != null" >
+        gname,
+      </if>
+      <if test="glinkman != null" >
+        glinkman,
+      </if>
+      <if test="gphone != null" >
+        gphone,
+      </if>
+      <if test="gadress != null" >
+        gadress,
+      </if>
+      <if test="gaccount != null" >
+        gaccount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gid != null" >
+        #{gid,jdbcType=INTEGER},
+      </if>
+      <if test="gname != null" >
+        #{gname,jdbcType=CHAR},
+      </if>
+      <if test="glinkman != null" >
+        #{glinkman,jdbcType=CHAR},
+      </if>
+      <if test="gphone != null" >
+        #{gphone,jdbcType=CHAR},
+      </if>
+      <if test="gadress != null" >
+        #{gadress,jdbcType=CHAR},
+      </if>
+      <if test="gaccount != null" >
+        #{gaccount,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.javasm.productManager.entity.GongYingShangInfoExample" resultType="java.lang.Integer" >
+    select count(*) from t_gongyingshang
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_gongyingshang
+    <set >
+      <if test="record.gid != null" >
+        gid = #{record.gid,jdbcType=INTEGER},
+      </if>
+      <if test="record.gname != null" >
+        gname = #{record.gname,jdbcType=CHAR},
+      </if>
+      <if test="record.glinkman != null" >
+        glinkman = #{record.glinkman,jdbcType=CHAR},
+      </if>
+      <if test="record.gphone != null" >
+        gphone = #{record.gphone,jdbcType=CHAR},
+      </if>
+      <if test="record.gadress != null" >
+        gadress = #{record.gadress,jdbcType=CHAR},
+      </if>
+      <if test="record.gaccount != null" >
+        gaccount = #{record.gaccount,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_gongyingshang
+    set gid = #{record.gid,jdbcType=INTEGER},
+      gname = #{record.gname,jdbcType=CHAR},
+      glinkman = #{record.glinkman,jdbcType=CHAR},
+      gphone = #{record.gphone,jdbcType=CHAR},
+      gadress = #{record.gadress,jdbcType=CHAR},
+      gaccount = #{record.gaccount,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.productManager.entity.GongYingShangInfo" >
+    update t_gongyingshang
+    <set >
+      <if test="gname != null" >
+        gname = #{gname,jdbcType=CHAR},
+      </if>
+      <if test="glinkman != null" >
+        glinkman = #{glinkman,jdbcType=CHAR},
+      </if>
+      <if test="gphone != null" >
+        gphone = #{gphone,jdbcType=CHAR},
+      </if>
+      <if test="gadress != null" >
+        gadress = #{gadress,jdbcType=CHAR},
+      </if>
+      <if test="gaccount != null" >
+        gaccount = #{gaccount,jdbcType=CHAR},
+      </if>
+    </set>
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.productManager.entity.GongYingShangInfo" >
+    update t_gongyingshang
+    set gname = #{gname,jdbcType=CHAR},
+      glinkman = #{glinkman,jdbcType=CHAR},
+      gphone = #{gphone,jdbcType=CHAR},
+      gadress = #{gadress,jdbcType=CHAR},
+      gaccount = #{gaccount,jdbcType=CHAR}
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+  <!--自定义-->
+  <select id="getAllInfo" resultMap="BaseResultMap">
+    select * from t_gongyingshang
+  </select>
+</mapper>

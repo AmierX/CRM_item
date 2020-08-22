@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.aftersale.mapper.SalesreturnMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.aftersale.entity.Salesreturn" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="snumber" property="snumber" jdbcType="INTEGER" />
+    <result column="applyname" property="applyname" jdbcType="VARCHAR" />
+    <result column="applywhy" property="applywhy" jdbcType="VARCHAR" />
+    <result column="recorder" property="recorder" jdbcType="VARCHAR" />
+    <result column="recorddate" property="recorddate" jdbcType="TIMESTAMP" />
+    <result column="approver" property="approver" jdbcType="VARCHAR" />
+    <result column="approvedate" property="approvedate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="approveopinion" property="approveopinion" jdbcType="VARCHAR" />
+    <result column="approveresult" property="approveresult" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snumber, applyname, applywhy, recorder, recorddate, approver, approvedate, status, 
+    approveopinion, approveresult
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_salesreturn
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectSalesreturns" resultType="Salesreturn" parameterType="Salesreturn" >
+    select
+    <include refid="Base_Column_List" />
+    from s_salesreturn
+    <where>
+      <if test="snumber!=null and snumber!=''">
+        and snumber = #{snumber}
+      </if>
+      <if test="recorder!=null and recorder!=''">
+        and recorder = #{recorder}
+      </if>
+      <if test="approver!=null and approver!=''">
+        and approver = #{approver}
+      </if>
+      <if test="status!=null and status!=''">
+        and status = #{status}
+      </if>
+      <if test="approveresult!=null and approveresult!=''">
+        and approveresult = #{approveresult}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from s_salesreturn
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteTuiHuo">
+    delete from s_salesreturn where id in
+    <foreach collection="array" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
+
+
+
+  <insert id="insert" parameterType="com.javasm.aftersale.entity.Salesreturn" >
+    insert into s_salesreturn (id, snumber, applyname, 
+      applywhy, recorder, recorddate, 
+      approver, approvedate, status, 
+      approveopinion, approveresult)
+    values (#{id,jdbcType=INTEGER}, #{snumber,jdbcType=INTEGER}, #{applyname,jdbcType=VARCHAR}, 
+      #{applywhy,jdbcType=VARCHAR}, #{recorder,jdbcType=VARCHAR}, #{recorddate,jdbcType=TIMESTAMP}, 
+      #{approver,jdbcType=VARCHAR}, #{approvedate,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, 
+      #{approveopinion,jdbcType=VARCHAR}, #{approveresult,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.aftersale.entity.Salesreturn" >
+    insert into s_salesreturn
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snumber != null" >
+        snumber,
+      </if>
+      <if test="applyname != null" >
+        applyname,
+      </if>
+      <if test="applywhy != null" >
+        applywhy,
+      </if>
+      <if test="recorder != null" >
+        recorder,
+      </if>
+      <if test="recorddate != null" >
+        recorddate,
+      </if>
+      <if test="approver != null" >
+        approver,
+      </if>
+      <if test="approvedate != null" >
+        approvedate,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="approveopinion != null" >
+        approveopinion,
+      </if>
+      <if test="approveresult != null" >
+        approveresult,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="snumber != null" >
+        #{snumber,jdbcType=INTEGER},
+      </if>
+      <if test="applyname != null" >
+        #{applyname,jdbcType=VARCHAR},
+      </if>
+      <if test="applywhy != null" >
+        #{applywhy,jdbcType=VARCHAR},
+      </if>
+      <if test="recorder != null" >
+        #{recorder,jdbcType=VARCHAR},
+      </if>
+      <if test="recorddate != null" >
+        #{recorddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approver != null" >
+        #{approver,jdbcType=VARCHAR},
+      </if>
+      <if test="approvedate != null" >
+        #{approvedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="approveopinion != null" >
+        #{approveopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="approveresult != null" >
+        #{approveresult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.aftersale.entity.Salesreturn" >
+    update s_salesreturn
+    <set >
+      <if test="snumber != null" >
+        snumber = #{snumber,jdbcType=INTEGER},
+      </if>
+      <if test="applyname != null" >
+        applyname = #{applyname,jdbcType=VARCHAR},
+      </if>
+      <if test="applywhy != null" >
+        applywhy = #{applywhy,jdbcType=VARCHAR},
+      </if>
+      <if test="recorder != null" >
+        recorder = #{recorder,jdbcType=VARCHAR},
+      </if>
+      <if test="recorddate != null" >
+        recorddate = #{recorddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approver != null" >
+        approver = #{approver,jdbcType=VARCHAR},
+      </if>
+      <if test="approvedate != null" >
+        approvedate = #{approvedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="approveopinion != null" >
+        approveopinion = #{approveopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="approveresult != null" >
+        approveresult = #{approveresult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.aftersale.entity.Salesreturn" >
+    update s_salesreturn
+    set snumber = #{snumber,jdbcType=INTEGER},
+      applyname = #{applyname,jdbcType=VARCHAR},
+      applywhy = #{applywhy,jdbcType=VARCHAR},
+      recorder = #{recorder,jdbcType=VARCHAR},
+      recorddate = #{recorddate,jdbcType=TIMESTAMP},
+      approver = #{approver,jdbcType=VARCHAR},
+      approvedate = #{approvedate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      approveopinion = #{approveopinion,jdbcType=VARCHAR},
+      approveresult = #{approveresult,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

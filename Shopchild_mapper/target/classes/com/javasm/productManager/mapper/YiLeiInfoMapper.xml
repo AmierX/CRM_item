@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.productManager.mapper.YiLeiInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.productManager.entity.YiLeiInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="puhuo" property="puhuo" jdbcType="INTEGER" />
+    <result column="beiji" property="beiji" jdbcType="INTEGER" />
+    <result column="orderprice" property="orderprice" jdbcType="DECIMAL" />
+    <result column="marketprice" property="marketprice" jdbcType="DECIMAL" />
+    <result column="shopprice" property="shopprice" jdbcType="DECIMAL" />
+    <result column="loweststock" property="loweststock" jdbcType="INTEGER" />
+    <result column="orderable" property="orderable" jdbcType="INTEGER" />
+  </resultMap>
+
+  <resultMap id="showMap" type="com.javasm.productManager.entity.YiLeiInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="puhuo" property="puhuo" jdbcType="INTEGER" />
+    <result column="beiji" property="beiji" jdbcType="INTEGER" />
+    <result column="orderprice" property="orderprice" jdbcType="DECIMAL" />
+    <result column="marketprice" property="marketprice" jdbcType="DECIMAL" />
+    <result column="shopprice" property="shopprice" jdbcType="DECIMAL" />
+    <result column="loweststock" property="loweststock" jdbcType="INTEGER" />
+    <result column="orderable" property="orderable" jdbcType="INTEGER" />
+    <result column="sname" property="sname" jdbcType="CHAR" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="shenhe" property="shenhe" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, puhuo, beiji, orderprice, marketprice, shopprice, loweststock, orderable
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.javasm.productManager.entity.YiLeiInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_yilei_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_yilei_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_yilei_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.javasm.productManager.entity.YiLeiInfoExample" >
+    delete from t_yilei_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.javasm.productManager.entity.YiLeiInfo" >
+    insert into t_yilei_info (id, puhuo, beiji, 
+      orderprice, marketprice, shopprice, 
+      loweststock, orderable)
+    values (#{id,jdbcType=INTEGER}, #{puhuo,jdbcType=INTEGER}, #{beiji,jdbcType=INTEGER}, 
+      #{orderprice,jdbcType=DECIMAL}, #{marketprice,jdbcType=DECIMAL}, #{shopprice,jdbcType=DECIMAL}, 
+      #{loweststock,jdbcType=INTEGER}, #{orderable,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.productManager.entity.YiLeiInfo" >
+    insert into t_yilei_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="puhuo != null" >
+        puhuo,
+      </if>
+      <if test="beiji != null" >
+        beiji,
+      </if>
+      <if test="orderprice != null" >
+        orderprice,
+      </if>
+      <if test="marketprice != null" >
+        marketprice,
+      </if>
+      <if test="shopprice != null" >
+        shopprice,
+      </if>
+      <if test="loweststock != null" >
+        loweststock,
+      </if>
+      <if test="orderable != null" >
+        orderable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="puhuo != null" >
+        #{puhuo,jdbcType=INTEGER},
+      </if>
+      <if test="beiji != null" >
+        #{beiji,jdbcType=INTEGER},
+      </if>
+      <if test="orderprice != null" >
+        #{orderprice,jdbcType=DECIMAL},
+      </if>
+      <if test="marketprice != null" >
+        #{marketprice,jdbcType=DECIMAL},
+      </if>
+      <if test="shopprice != null" >
+        #{shopprice,jdbcType=DECIMAL},
+      </if>
+      <if test="loweststock != null" >
+        #{loweststock,jdbcType=INTEGER},
+      </if>
+      <if test="orderable != null" >
+        #{orderable,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.javasm.productManager.entity.YiLeiInfoExample" resultType="java.lang.Integer" >
+    select count(*) from t_yilei_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_yilei_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.puhuo != null" >
+        puhuo = #{record.puhuo,jdbcType=INTEGER},
+      </if>
+      <if test="record.beiji != null" >
+        beiji = #{record.beiji,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderprice != null" >
+        orderprice = #{record.orderprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.marketprice != null" >
+        marketprice = #{record.marketprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shopprice != null" >
+        shopprice = #{record.shopprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.loweststock != null" >
+        loweststock = #{record.loweststock,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderable != null" >
+        orderable = #{record.orderable,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_yilei_info
+    set id = #{record.id,jdbcType=INTEGER},
+      puhuo = #{record.puhuo,jdbcType=INTEGER},
+      beiji = #{record.beiji,jdbcType=INTEGER},
+      orderprice = #{record.orderprice,jdbcType=DECIMAL},
+      marketprice = #{record.marketprice,jdbcType=DECIMAL},
+      shopprice = #{record.shopprice,jdbcType=DECIMAL},
+      loweststock = #{record.loweststock,jdbcType=INTEGER},
+      orderable = #{record.orderable,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.productManager.entity.YiLeiInfo" >
+    update t_yilei_info
+    <set >
+      <if test="puhuo != null" >
+        puhuo = #{puhuo,jdbcType=INTEGER},
+      </if>
+      <if test="beiji != null" >
+        beiji = #{beiji,jdbcType=INTEGER},
+      </if>
+      <if test="orderprice != null" >
+        orderprice = #{orderprice,jdbcType=DECIMAL},
+      </if>
+      <if test="marketprice != null" >
+        marketprice = #{marketprice,jdbcType=DECIMAL},
+      </if>
+      <if test="shopprice != null" >
+        shopprice = #{shopprice,jdbcType=DECIMAL},
+      </if>
+      <if test="loweststock != null" >
+        loweststock = #{loweststock,jdbcType=INTEGER},
+      </if>
+      <if test="orderable != null" >
+        orderable = #{orderable,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.productManager.entity.YiLeiInfo" >
+    update t_yilei_info
+    set puhuo = #{puhuo,jdbcType=INTEGER},
+      beiji = #{beiji,jdbcType=INTEGER},
+      orderprice = #{orderprice,jdbcType=DECIMAL},
+      marketprice = #{marketprice,jdbcType=DECIMAL},
+      shopprice = #{shopprice,jdbcType=DECIMAL},
+      loweststock = #{loweststock,jdbcType=INTEGER},
+      orderable = #{orderable,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--自定义-->
+  <select id="getAllInfo" resultMap="showMap">
+
+    select  a.*,b.sname from t_yilei_info a  left join  t_product b on  a.`sid`=b.`sid`
+  </select>
+
+  <!--根据sid把该条记录整合到商品表-->
+  <select id="queryBySid" resultMap="showMap">
+
+     select a.*,b.sname from t_yilei_info a left join t_product b on a.`sid`=b.sid where a.`sid`=#{sid}
+  </select>
+  <!--审核通过把0改为1-->
+  <update id="tongguo">
+    update t_yilei_info set shenhe=1 where sid=#{sid}
+  </update>
+  <!--审核拒绝把0改为3-->
+  <update id="jujue">
+    update t_yilei_info set shenhe=3 where sid=#{sid}
+  </update>
+
+  <!--级联添加-->
+  <insert id="addwithJiLian" >
+      insert into t_yilei_info(beiji,orderprice,marketprice,shopprice,loweststock,orderable,sid) values (#{beiji},#{orderprice},#{marketprice},#{shopprice},#{loweststock},#{orderable},#{sid})
+  </insert>
+</mapper>

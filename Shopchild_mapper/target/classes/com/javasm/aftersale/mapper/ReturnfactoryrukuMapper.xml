@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javasm.aftersale.mapper.ReturnfactoryrukuMapper" >
+  <resultMap id="BaseResultMap" type="com.javasm.aftersale.entity.Returnfactoryruku" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="rukudanhao" property="rukudanhao" jdbcType="VARCHAR" />
+    <result column="rukustatus" property="rukustatus" jdbcType="VARCHAR" />
+    <result column="zhidanren" property="zhidanren" jdbcType="VARCHAR" />
+    <result column="returnsite" property="returnsite" jdbcType="VARCHAR" />
+    <result column="why" property="why" jdbcType="VARCHAR" />
+    <result column="beizhu" property="beizhu" jdbcType="VARCHAR" />
+    <result column="zhidandate" property="zhidandate" jdbcType="TIMESTAMP" />
+    <result column="approver" property="approver" jdbcType="VARCHAR" />
+    <result column="approveopinion" property="approveopinion" jdbcType="VARCHAR" />
+    <result column="approveresult" property="approveresult" jdbcType="VARCHAR" />
+    <result column="approvestatus" property="approvestatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, rukudanhao, rukustatus, zhidanren, returnsite, why, beizhu, zhidandate, approver, 
+    approveopinion, approveresult, approvestatus
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_returnfactoryruku
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectRuKus" resultType="Returnfactoryruku" parameterType="Returnfactoryruku" >
+    select
+    <include refid="Base_Column_List" />
+    from s_returnfactoryruku
+    <where>
+      <if test="rukudanhao != null and rukudanhao != ''">
+        and rukudanhao = #{rukudanhao}
+      </if>
+      <if test="rukustatus != null and rukustatus != ''">
+        and rukustatus = #{rukustatus}
+      </if>
+      <if test="zhidanren != null and zhidanren != ''">
+        and zhidanren = #{zhidanren}
+      </if>
+      <if test="approver != null and approver != ''">
+        and approver = #{approver}
+      </if>
+      <if test="approvestatus != null and approvestatus != ''">
+        and approvestatus = #{approvestatus}
+      </if>
+    </where>
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from s_returnfactoryruku
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteRuKu">
+    delete from s_returnfactoryruku where id in
+    <foreach collection="array" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
+
+
+
+
+  <insert id="insert" parameterType="com.javasm.aftersale.entity.Returnfactoryruku" >
+    insert into s_returnfactoryruku (id, rukudanhao, rukustatus, 
+      zhidanren, returnsite, why, 
+      beizhu, zhidandate, approver, 
+      approveopinion, approveresult, approvestatus
+      )
+    values (#{id,jdbcType=INTEGER}, #{rukudanhao,jdbcType=VARCHAR}, #{rukustatus,jdbcType=VARCHAR}, 
+      #{zhidanren,jdbcType=VARCHAR}, #{returnsite,jdbcType=VARCHAR}, #{why,jdbcType=VARCHAR}, 
+      #{beizhu,jdbcType=VARCHAR}, #{zhidandate,jdbcType=TIMESTAMP}, #{approver,jdbcType=VARCHAR}, 
+      #{approveopinion,jdbcType=VARCHAR}, #{approveresult,jdbcType=VARCHAR}, #{approvestatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.javasm.aftersale.entity.Returnfactoryruku" >
+    insert into s_returnfactoryruku
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="rukudanhao != null" >
+        rukudanhao,
+      </if>
+      <if test="rukustatus != null" >
+        rukustatus,
+      </if>
+      <if test="zhidanren != null" >
+        zhidanren,
+      </if>
+      <if test="returnsite != null" >
+        returnsite,
+      </if>
+      <if test="why != null" >
+        why,
+      </if>
+      <if test="beizhu != null" >
+        beizhu,
+      </if>
+      <if test="zhidandate != null" >
+        zhidandate,
+      </if>
+      <if test="approver != null" >
+        approver,
+      </if>
+      <if test="approveopinion != null" >
+        approveopinion,
+      </if>
+      <if test="approveresult != null" >
+        approveresult,
+      </if>
+      <if test="approvestatus != null" >
+        approvestatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="rukudanhao != null" >
+        #{rukudanhao,jdbcType=VARCHAR},
+      </if>
+      <if test="rukustatus != null" >
+        #{rukustatus,jdbcType=VARCHAR},
+      </if>
+      <if test="zhidanren != null" >
+        #{zhidanren,jdbcType=VARCHAR},
+      </if>
+      <if test="returnsite != null" >
+        #{returnsite,jdbcType=VARCHAR},
+      </if>
+      <if test="why != null" >
+        #{why,jdbcType=VARCHAR},
+      </if>
+      <if test="beizhu != null" >
+        #{beizhu,jdbcType=VARCHAR},
+      </if>
+      <if test="zhidandate != null" >
+        #{zhidandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approver != null" >
+        #{approver,jdbcType=VARCHAR},
+      </if>
+      <if test="approveopinion != null" >
+        #{approveopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="approveresult != null" >
+        #{approveresult,jdbcType=VARCHAR},
+      </if>
+      <if test="approvestatus != null" >
+        #{approvestatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javasm.aftersale.entity.Returnfactoryruku" >
+    update s_returnfactoryruku
+    <set >
+      <if test="rukudanhao != null" >
+        rukudanhao = #{rukudanhao,jdbcType=VARCHAR},
+      </if>
+      <if test="rukustatus != null" >
+        rukustatus = #{rukustatus,jdbcType=VARCHAR},
+      </if>
+      <if test="zhidanren != null" >
+        zhidanren = #{zhidanren,jdbcType=VARCHAR},
+      </if>
+      <if test="returnsite != null" >
+        returnsite = #{returnsite,jdbcType=VARCHAR},
+      </if>
+      <if test="why != null" >
+        why = #{why,jdbcType=VARCHAR},
+      </if>
+      <if test="beizhu != null" >
+        beizhu = #{beizhu,jdbcType=VARCHAR},
+      </if>
+      <if test="zhidandate != null" >
+        zhidandate = #{zhidandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approver != null" >
+        approver = #{approver,jdbcType=VARCHAR},
+      </if>
+      <if test="approveopinion != null" >
+        approveopinion = #{approveopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="approveresult != null" >
+        approveresult = #{approveresult,jdbcType=VARCHAR},
+      </if>
+      <if test="approvestatus != null" >
+        approvestatus = #{approvestatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javasm.aftersale.entity.Returnfactoryruku" >
+    update s_returnfactoryruku
+    set rukudanhao = #{rukudanhao,jdbcType=VARCHAR},
+      rukustatus = #{rukustatus,jdbcType=VARCHAR},
+      zhidanren = #{zhidanren,jdbcType=VARCHAR},
+      returnsite = #{returnsite,jdbcType=VARCHAR},
+      why = #{why,jdbcType=VARCHAR},
+      beizhu = #{beizhu,jdbcType=VARCHAR},
+      zhidandate = #{zhidandate,jdbcType=TIMESTAMP},
+      approver = #{approver,jdbcType=VARCHAR},
+      approveopinion = #{approveopinion,jdbcType=VARCHAR},
+      approveresult = #{approveresult,jdbcType=VARCHAR},
+      approvestatus = #{approvestatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
