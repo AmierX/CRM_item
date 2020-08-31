@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.NumberFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class B2CServiceImpl implements B2CService {
@@ -194,11 +195,12 @@ public class B2CServiceImpl implements B2CService {
             if (returnData != null) {
                 return JSON.parseObject(returnData, new TypeReference<ArrayList<B2cReturngoods>>(){});
             } else {
-                redisService.setex(selectReturngoodsByNum + b2cReturngoods.getB2crdId().toString(), 60 * 60 * 24, JSON.toJSONString(brgm.selectAllB2cReturngoods(b2cReturngoods)));
-                return brgm.selectAllB2cReturngoods(b2cReturngoods);
+                List<B2cReturngoods> b2cReturngoods1 = brgm.selectAllB2cReturngoods(b2cReturngoods);
+                redisService.setex(selectReturngoodsByNum + b2cReturngoods.getB2crdId().toString(), 60 * 60 * 24, JSON.toJSONString(b2cReturngoods1));
+                return b2cReturngoods1;
             }
         }
-        return brgm.selectAllB2cReturngoods(b2cReturngoods);
+        return null;
     }
 
     @Override
@@ -215,7 +217,7 @@ public class B2CServiceImpl implements B2CService {
                 return b2cGoodinfos;
             }
         }
-        return bgm.selectGoodByNum(num);
+        return null;
     }
 
     @Override
@@ -225,17 +227,18 @@ public class B2CServiceImpl implements B2CService {
             if (returnData != null) {
                 return JSON.parseObject(returnData, new TypeReference<ArrayList<B2cAddressee>>(){});
             } else {
-                redisService.setex(selectUserByNum + adOrderNum.toString(), 60 * 60 * 24, JSON.toJSONString(bam.selectUserByNum(adOrderNum)));
-                return bam.selectUserByNum(adOrderNum);
+                List<B2cAddressee> returnList =  bam.selectUserByNum(adOrderNum);
+                redisService.setex(selectUserByNum + adOrderNum.toString(), 60 * 60 * 24, JSON.toJSONString(returnList));
+                return returnList;
             }
         }
-        return bam.selectUserByNum(adOrderNum);
+        return null;
     }
 
     @Override
     @Transactional
     public Map<String, Object> SaleorderDetails(B2cSaleorder b2cSaleorder) {
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new ConcurrentHashMap<>();
         List<B2cSaleorder> Saleorder = bsm.selectOneSaleorder(b2cSaleorder);
         map.put("Saleorder", Saleorder);
         List<B2cAddressee> Addressee = bam.selectUserByNum(b2cSaleorder.getB2cNum());
@@ -308,6 +311,7 @@ public class B2CServiceImpl implements B2CService {
         }
     }
 
+    @Transactional
     @Override
     public void inputShopOrder(MultipartFile file) {
         try {
