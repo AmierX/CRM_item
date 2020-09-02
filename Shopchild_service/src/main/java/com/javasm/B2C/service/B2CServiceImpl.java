@@ -251,7 +251,7 @@ public class B2CServiceImpl implements B2CService {
     @Override
     @Transactional
     public Map<String, Object> returnOrderDetails(B2cSaleorder b2cSaleorder) {
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new ConcurrentHashMap<>();
         List<B2cSaleorder> Saleorder = bsm.selectOneSaleorder(b2cSaleorder);
         map.put("Saleorder", Saleorder);
         List<B2cAddressee> Addressee = bam.selectUserByNum(b2cSaleorder.getB2cNum());
